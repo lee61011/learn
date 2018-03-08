@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue1026.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--1.2 使用组件-->
+    <login></login>
+    <!--2.1 使用组件-->
+    <regest></regest>
+
+    <!--3.1 将模板写在HTML中
+        3.2 使用组件-->
+    <template id="account">
+        <a href="#" @click="login">登录</a> | <a href="#" @click="regest">注册</a>
+    </template>
+    <account></account>
+
+</div>
+</body>
+<script>
+    /*定义一个全局组件写法一
+    * 1.定义组件    2.注册组件  3.使用组件*/
+    // 1.0定义组件
+    var login = Vue.extend({
+        template: '<h1>登录页面</h1>'
+    });
+    // 1.1注册组件
+    Vue.component("login",login)
+
+    /*定义一个全局组件写法二
+    * 2.0 定义注册一步到位  2.1 使用组件*/
+    // 2.0 定义注册一步到位
+    Vue.component("regest",{
+        template: "<h1>注册页面</h1>"
+    })
+
+    /*定义一个全局组件写法三*/
+    // 3.0 定义注册一步到位
+    Vue.component("account",{
+        // 将模板写在HTML中
+        template: "#account",
+        // 注意： 在组建中使用data定义的是一个方法而不是一个对象，否则无效果
+        data: function () {
+            return {
+                msg: "我是账号组件",
+            }
+        },
+        methods: {
+            login: function() {
+                alert (this.msg)
+            },
+            regest: function () {
+                alert (this.msg)
+            }
+        }
+    })
+
+
+
+    new Vue ({
+        el : "#app",
+    });
+</script>
+</html>

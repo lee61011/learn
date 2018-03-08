@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>子组件向父组件传值</title>
+    <script src="../vue221.js"></script>
+</head>
+<body>
+<template id="suber">
+    <div>
+        <h1>我是子组件,点击按钮向父组件传值</h1>
+        <!--1.0 点击按钮触发 senddata 事件-->
+        <button @click="senddata">发送消息</button>
+    </div>
+</template>
+
+
+<div id="app">
+    <!--3.0 使用v-on：XXX 来接收2.0传递过来的值-->
+    <suber v-on:send="getdata"></suber>
+    <h2>我接收到了子组件传递过来的值是：{{getSubData}}</h2>
+</div>
+
+<script>
+    new Vue({
+        el:"#app",
+        data: {
+            "getSubData" : ""
+        },
+        methods: {
+            /*3.1 传值的进一步处理*/
+            getdata: function(input) {
+                this.getSubData = input;
+                //alert(input)
+            }
+        },
+        components:{
+            "suber": {
+                template: "#suber",
+                methods: {
+                    /*2.0 用this.$emit("send","news")传值
+                            参一与接收参数的方法名相同
+                            参二为发送的值*/
+                    senddata: function() {
+                        this.$emit("send","news")
+                    }
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>
