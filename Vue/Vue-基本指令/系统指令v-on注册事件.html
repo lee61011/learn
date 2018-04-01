@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 1.0 导入 Vue.js  -->
+    <script src="./lib/vue221.js"></script>
+</head>
+<body>
+    <div id="app">
+         <h2>名字: {{name}}</h2>
+        <button v-on:click="change">改变名字</button>
+    </div>
+</body>
+<script>
+    /* 2.0 实例化Vue对象 */
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            name: '张三李四王老五'
+        },
+        methods: {
+            change: function(){
+                this.name = '小明小红李梅梅'
+            }
+        }
+    });
+</script>
+</html>
