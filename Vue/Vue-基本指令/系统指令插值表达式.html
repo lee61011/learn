@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>插值表达式</title>
+    <script src="./lib/vue221.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h2>{{name1}}</h2>
+        <h2>{{name2}}</h2>
+        <h2>'name1 == name2 ? "true" : "false"' ==> {{name1 == name2 ? "true" : "false"}}</h2>
+
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            name1: "张三李四王老五",
+            name2: "小明小红李梅梅"
+        }
+    });
+</script>
+</html>
