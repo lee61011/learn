@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>系统指令v-bind</title>
+    <script src="./lib/vue221.js"></script>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-bind:value="value" v-bind:placeholder="placeholder">
+
+    <input type="text" :value="value">
+
+    <!--使用 v-bind 可以给链接里面绑定一个ID值-->
+    <a v-bind="{href:'http://www.baidu.com/index/'+id}">跳转链接</a>
+</div>
+</body>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            placeholder: "请输入信息",
+            value: "",
+            id: "1"
+        }
+    });
+</script>
+</html>
