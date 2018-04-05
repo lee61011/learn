@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>系统指令v-for的使用</title>
+    <script src="./lib/vue221.js"></script>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <!--使用v-for指令的 index 可以输出 item 的索引-->
+        <li v-for="(item,index) in list">{{index}}-----{{item}}</li>
+    </ul>
+    <ul>
+        <!--使用v-for指令遍历一个对象数组-->
+        <li v-for="(item,index) in users">{{index}} --- name: {{item.name}} ------  age: {{item.age}}</li>
+    </ul>
+    <ul>
+        <li v-for="item in users">name: {{item.name}} ------  age: {{item.age}}</li>
+    </ul>
+    <ul>
+        <!--当需要遍历的对象里面有特殊值 例如重复的 时  可以使用:key="index"来标记唯一性
+            vue1.0 使用 track-by="$index"-->
+        <li v-for="(item,index) in value" :key="index">{{index}}---{{item}}</li>
+    </ul>
+</div>
+</body>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            list: [1,2,3,4,5],
+            value: [1,2,3,4,5,5,5],
+            users:[
+                {name: 'zhangsan', age: 18},
+                {name: 'lisi', age: 20},
+                {name: 'wangwu', age: 22},
+            ]
+        }
+
+    });
+</script>
+</html>

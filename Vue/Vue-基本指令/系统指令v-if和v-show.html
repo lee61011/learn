@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>系统指令v-if和v-show</title>
+    <script src="./lib/vue221.js"></script>
+</head>
+<body>
+<div id="app">
+    <h3>v-if</h3>
+    <button v-on:click="viffun">v-if显示/隐藏切换</button>
+    <p v-if="vif">作用: 根据表达式值的真假条件来判断是否渲染元素,如果条件为false不渲染(达到隐藏元素的目的),为true则渲染.在切换时元素及他的数据绑定被销毁并重建</p>
+
+
+    <h3>v-show</h3>
+    <button v-on:click="vshowfun">v-show显示/隐藏切换</button>
+    <p v-show="vshow">根据表达式的真假值,切换元素的display CSS属性,如果为false,则在元素上添加display:none 来隐藏元素;否则移除display:none实现显示元素</p>
+</div>
+</body>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            vif:false,
+            vshow: false
+        },
+        methods:{
+            viffun: function () {
+                this.vif = !this.vif;
+            },
+            vshowfun: function () {
+                this.vshow = !this.vshow;
+            }
+        }
+    });
+</script>
+</html>
