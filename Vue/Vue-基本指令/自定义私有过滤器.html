@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义私有过滤器</title>
+    <script src="./lib/vue221.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{time}}
+        <br>
+        {{time | datefmt }}
+    </div>
+</body>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            time: new Date(),
+        },
+        filters: {
+            //  input是过滤器的默认参数 input的值永远都是取自于 | 左边的内容
+            datefmt: function (input) {
+                //  过滤器的逻辑: 将input 的值格式化为 yyyy-MM-dd 字符串输出
+                var res = '';
+                var year = input.getFullYear();
+                var month = input.getMonth() + 1;
+                var day = input.getDay() + 1;
+
+                res = year + '-' + month + '-' + day;
+                return res;
+            }
+        }
+    });
+</script>
+</html>
