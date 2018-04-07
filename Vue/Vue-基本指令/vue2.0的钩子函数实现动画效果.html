@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue2.0的钩子函数实现动画效果</title>
+    <style>
+        .show{
+            transition: all 1s ease;
+        }
+    </style>
+    <script src="./lib/vue221.js"></script>
+</head>
+<body>
+<!-- https://cn.vuejs.org/v2/guide/transitions.html#JavaScript-%E9%92%A9%E5%AD%90 -->
+
+    <div id="app">
+        <button @click="toggle">显示/隐藏</button>
+
+        <transition @before-enter="beforeEnter"
+                    @enter="enter"
+                    @after-enter="afterEnter">
+            <h2 v-show="isshow" class="show">{{msg}}</h2>
+        </transition>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            msg: "hello Vue",
+            isshow: false,
+        },
+        methods: {
+            toggle: function () {
+                this.isshow = !this.isshow;
+            },
+            //  1.0 这里主要是通过JS定义当前实现动画的初始位置
+            beforeEnter: function (el) {
+                el.style.transform = "translate(100px,0)";
+            },
+            //  2.0 通过JS定义的是动画结束的位置
+            enter: function (el,done) {
+                //  2.0.1   设置一下刷新状态
+                el.offsetWidth;
+                //  2.0.2   设置动画的结束位置
+                el.style.transform = "translate(0px,0)";
+                //  2.0.3   手动调用一下 done 方法,有这个方法去决定动画是否结束了; 否则动画的消失会有延时
+                done();
+            },
+            //  3.0 动画的状态复原设置
+            afterEnter: function (el) {
+                this.isshow = !this.isshow;
+            },
+        }
+    });
+</script>
+</html>

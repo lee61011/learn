@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue结合animate实现过度动画</title>
+    <!--1.0 导入 animate.css 动画库-->
+    <link rel="stylesheet" href="./lib/animate.css">
+    <!--4.0 定义动画类-->
+    <style>
+        .show{
+            transition: all 1s ease;
+        }
+    </style>
+    <script src="./lib/vue221.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button @click="toggle">显示/隐藏</button>
+
+        <!--2.0 使用 <transition> 标签将元素包裹起来
+                添加进入动画  enter-active-class="进入动画"
+                添加离开动画  leave-active-class="离开动画"-->
+        <transition enter-active-class="fadeInRight"
+                    leave-active-class="fadeOutRight">
+            <!--3.0 给元素添加动画类与animated类-->
+            <h2 v-show="isshow" class="animated" class="show">{{msg}}</h2>
+        </transition>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            msg: "hello vuejs",
+            isshow: false,
+        },
+        methods: {
+            toggle: function () {
+                this.isshow = !this.isshow;
+            }
+        }
+    });
+</script>
+</html>
