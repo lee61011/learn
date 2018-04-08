@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>全局过滤器</title>
+    <script src="./lib/vue221.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{time | datefmt}}
+    </div>
+    <div id="app1">
+        {{time | datefmt}}
+    </div>
+</body>
+<script>
+    //  定义一个名称为 datefmt 的全局过滤器
+    Vue.filter('datefmt',function (input) {
+        var res = '';
+        var year = input.getFullYear();
+        var month = input.getMonth();
+        var day = input.getDay();
+
+        res = year + '-' + month + '-' + day;
+        return res;
+    });
+
+    new Vue({
+        el: "#app",
+        data:{
+            time: new Date(),
+        },
+    });
+    new Vue({
+        el: "#app1",
+        data:{
+            time: new Date(),
+        },
+    });
+</script>
+</html>
