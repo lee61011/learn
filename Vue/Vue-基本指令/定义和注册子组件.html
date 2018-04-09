@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>定义和注册子组件</title>
+    <script src="./lib/vue221.js"></script>
+</head>
+<body>
+
+    <template id="account">
+        <div>
+            <h1>账户组件</h1>
+            <a href="#" @click="showLogin">登录组件</a>   |
+            <a href="#" @click="showRegest">注册组件</a>
+        </div>
+    </template>
+
+    <div id="app">
+        <account></account>
+    </div>
+</body>
+<script>
+    Vue.component('account',{
+        template: "#account",
+        data: function(){
+            return{
+                loginMsg: "登录组件",
+                regestMsg: "注册组件",
+            }
+        },
+        methods: {
+            showLogin: function () {
+                alert(this.loginMsg);
+            },
+            showRegest: function () {
+                alert(this.regestMsg);
+            }
+        },
+        components: {
+            'login': {
+                template: "<h3>登录组件</h3>"
+            },
+            'regest': {
+                template: "<h3>注册组件</h3>"
+            }
+        }
+    })
+
+    new Vue({
+        el: "#app",
+        data: {},
+    });
+</script>
+</html>

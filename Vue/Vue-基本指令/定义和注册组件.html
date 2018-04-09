@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>定义和注册组件</title>
+    <script src="./lib/vue221.js"></script>
+</head>
+<body>
+    <!-- 定义组件模板 -->
+    <template id="account">
+        <div>
+            <a href="#">登录</a> | <a href="#">注册</a>
+        </div>
+    </template>
+    <template id="login">
+        <h1>登录组件</h1>
+    </template>
+    <template id="regest">
+        <h1>注册组件</h1>
+    </template>
+
+    <div id="app">
+        <!-- 在Vue对象中使用组件-->
+        <account></account>
+        <login></login>
+        <regest></regest>
+    </div>
+</body>
+<script>
+    //  注册一个组件
+    Vue.component('account',{
+        template: "#account"
+    });
+    Vue.component('login',{
+        template: "#login"
+    });
+    Vue.component('regest',{
+        template: "#regest"
+    });
+    new Vue({
+        el: "#app",
+        data: {},
+    });
+</script>
+</html>
