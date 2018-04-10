@@ -18,7 +18,11 @@
             height: 36px;
             background-color: green;
         }
+        /*IE9: 行级元素在设置宽度的时候是失效的
+        IE8: 完全不支持语义标签(不支持html5)*/
         main{
+            /*将行级元素转换为块级元素  兼容IE9*/
+            display: block;
             width: 100%;
             height: 500px;
             background-color: #ccc;
@@ -43,6 +47,9 @@
     </style>
 </head>
 <body>
+<!--引入 html5shiv 文件兼容 IE8 及以下-->
+<script src="./html5shiv.min.js"></script>
+
 <!--
 <div class="header"></div>
 <div class="nav"></div>
