@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单中新增的其他属性</title>
+</head>
+<body>
+<form action="" id="myForm">
+    <!--placeholder:默认提示内容
+        autofocus: 默认获取焦点
+        autocomplete: 自动完成  on:打开 off:关闭
+                1. 必须成功提交过
+                2. 当前添加 autocomplete 的元素必须有 name 属性-->
+    用户名: <input type="text" name="userName" placeholder="请输入用户名" autofocus autocomplete="on"> <br>
+    <!--required: 必填项-->
+    <!--pattern: 正则表达式验证
+            *:代表任意个
+            ?:代表0个或1个
+            +:代表1个或多个-->
+    手机号: <input type="tel" name="userPhone" required pattern="^(\+86)?1\d{10}$"> <br>
+
+    <br><br>
+    <!--multiple: 可以选择多个文件-->
+    文件: <input type="file" name="photo" multiple> <br>
+    <!--email中使用 multiple 可以输入多个邮箱 以逗号分隔-->
+    邮箱: <input type="email" multiple>
+    
+    <!--提交-->
+    <input type="submit">
+</form>
+
+<!--下面这个元素并没有包含在form中,默认情况下表单元素的数据不会进行提交-->
+<!--form: 指定表单id,那么在将来指定id号的表单进行数据提交的时候,也会将当前元素一起提交-->
+地址: <input type="text" name="address" form="myForm">
+</body>
+</html>
