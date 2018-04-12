@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义属性</title>
+</head>
+<body>
+<!--定义-->
+    <!--规范: 1. data-开头
+              2. data-后必须至少有一个字符,多个单词使用-连接
+
+        建议: 1.名称应该都是用小写,不要包含任何大写字符
+              2.名称中不要包含任何的特殊字符
+              3. 名称不要使用纯数字
+    -->
+<p data-school-name="xd">西安电子科技大学</p>
+
+
+<!--取值-->
+<script>
+    window.onload = function () {
+        var p = document.querySelector("p");
+        /*获取自定义属性值*/
+        /*将data-后面的单词使用驼峰命名发链接*/
+        var value = p.dataset["schoolName"];
+        console.log(value);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新增的表单元素</title>
+</head>
+<body>
+<form action="">
+    <!--
+    书名:
+    <select name="" id="">
+        <option value="1">高级程序设计</option>
+        <option value="2">锋利的jQuery</option>
+        <option value="3">犀牛书</option>
+        <option value="4">ES6</option>
+        <option value="5">node.js</option>
+    </select>
+    -->
+
+    <!--不仅可以选择,还可以输入-->
+    <!--建立输入框与 datalist 的关联: list="datalist的id号"-->
+    书名: <input type="text" list="subjects">
+    <datalist id="subjects">
+        <!--创建选项值: value: 具体的值  label: 提示信息,辅助值-->
+        <option value="高级程序设计" label="红皮书"></option>
+        <option value="犀牛书" label="看不懂"></option>
+        <option value="Python" label="很好玩"></option>
+    </datalist>
+
+    <br><br>
+
+    网址: <input type="url" list="urls">
+    <datalist id="urls">
+        <!--如果输入框的type类型是url,那么value值必须添加 http://-->
+        <option value="http://www.baidu.com" label="百度"></option>
+        <option value="http://www.sohu.com" label="搜狐"></option>
+        <option value="http://www.163.com" label="网易"></option>
+    </datalist>
+
+
+    <br><br>
+    <!--显示输出信息： 只显示不能修改
+            1. 语义性更强
+            2. 值需要去设置,不能自动计算-->
+    <output>总金额: ￥100.00</output>
+</form>
+</body>
+</html>
