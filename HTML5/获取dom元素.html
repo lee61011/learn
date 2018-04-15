@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>获取dom元素</title>
+    <style>
+        .one{
+            color: red;
+        }
+        .two{
+            color: green;
+        }
+        .san{
+            color: skyblue;
+        }
+        .si{
+            color: blue;
+        }
+        .five{
+            color: pink;
+        }
+        .underline{
+
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li>第一个</li>
+    <li>第二个</li>
+    <li class="san">第三个</li>
+    <li>第四个</li>
+    <li>第五个</li>
+</ul>
+
+<input type="button" value="为第一个li元素添加样式" id="add">
+<input type="button" value="为第三个li元素移除样式" id="remove">
+<input type="button" value="为第五个li元素切换样式" id="toggle">
+<input type="button" value="判断第二个li元素是否包含某个样式" id="contain">
+</body>
+
+<script>
+    window.onload = function () {
+        /* getElementsByTagName: 获取的是数组*/
+        /* 索引: 不直观*/
+        /*var cli = document.getElementsByTagName("li")[0];*/
+
+        /*querySelector: 获取单个元素,如果获取的元素不知一个,那么会返回满足条件的第一个*/
+        var sanLi = document.querySelector(".san");
+        console.log(sanLi);
+
+        /*querySelectorAll: 获取满足条件的所有元素-----数组*/
+        var allLi = document.querySelectorAll("li")[0];
+        console.log(allLi);
+
+
+        /*add 为元素添加指定名称的样式  一次只能添加一个*/
+        document.querySelector("#add").onclick = function () {
+            /*classList: 当前所有元素的样式列表-----数组*/
+            document.querySelector("li").classList.add("one");
+            document.querySelector("li").classList.add("underline");
+        }
+
+        /*remove: 微元素移除指定名称的样式(不是移除class属性),一次只能一出一个*/
+        document.querySelector("#remove").onclick = function () {
+            /*classList: 当前所有元素的样式列表-----数组*/
+            document.querySelector(".san").classList.remove("san");
+        }
+
+        /*toggle: 切换元素的样式, 没有则添加,有则移除*/
+        document.querySelector("#toggle").onclick = function () {
+            document.querySelectorAll("li")[4].classList.toggle("five");
+        }
+
+        /*contain: 判断元素是否包含指定名称的样式 返回 true/false*/
+        document.querySelector("#contain").onclick = function () {
+            var isContain = document.querySelectorAll("li")[1].classList.contains("two");
+            console.log(isContain);
+        }
+
+    }
+</script>
+
+</html>
