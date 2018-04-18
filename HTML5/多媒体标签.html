@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>多媒体标签</title>
+</head>
+<body>
+<!--embed: 可以直接插入音频视频,本质是通过本地安装的视频播放软件来播放的.要求必须已经安装了这些软件   兼容性不好-->
+
+<!--audio: 音频-->
+<!--
+    src: 播放文件的路径
+    controls: 音频播放器的控制面板
+    autoplay: 自动播放
+    loop: 循环-->
+<audio src="xxx" controls autoplay loop></audio>
+
+
+<!--video: 视频-->
+<!--
+    src: 播放文件的路径
+    controls: 音频播放器的控制面板
+    autoplay: 自动播放
+    loop: 循环
+    poster: 视频播放前显示的画面,默认视频文件第一帧  (输入图片路径)
+    width: 视频的宽度
+    height: 视频的高度-->
+<!--修改视频宽高, 原视频的宽高比例不会改变-->
+<!--<video src="xxx" poster="xxx" controls width="800" height="600"></video>-->
+
+<!--source: 因为不同的浏览器所支持的视频格式是不一样的,为了保证用户能够看到视频,我们可以提供多个视频文件让浏览器来选择播放-->
+<video controls>
+    <!--视频源,可以有多个源-->
+    <source src="xxx.flv" type="video/flv">
+    <source src="xxx.mp4" type="video/mp4">
+</video>
+</body>
+</html>
