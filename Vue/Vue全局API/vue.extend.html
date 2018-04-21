@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.extend 扩展实例构造器</title>
+    <script src="../lib/vue221.js"></script>
+</head>
+<body>
+    <h1>Vue.entend 扩展实例构造器</h1>
+    <hr>
+
+    <!--<author></author>-->
+    <div id="author"></div>
+
+    <script type="text/javascript">
+        authorURL = Vue.extend({
+            template: "<h2> <a :href='url'>{{urlName}}</a> </h2>",
+            data: function () {
+                return {
+                    urlName: "vue官网",
+                    url: "https://cn.vuejs.org/v2/guide/",
+                }
+            }
+        });
+
+        /*new authorURL().$mount("author");       //  将实例绑定到 author 标签上*/
+        new authorURL().$mount("#author");
+    </script>
+</body>
+</html>
