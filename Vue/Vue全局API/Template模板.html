@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue Template 模板</title>
+    <script src="../lib/vue221.js"></script>
+</head>
+<body>
+    <h1>Vue Template 模板 三种写法</h1>
+    <hr>
+
+    <div id="app">
+        {{num}}
+    </div>
+    
+    <!--    ------------------  写法二  ------------------------
+    <template id="tmp2">
+        <h2 style="color: skyblue;">我是 Template 标签模板</h2>
+    </template>-->
+
+    <script type="x-template" id="tmp3">
+        <h2 style="color: orange;">我是 Script 标签模板</h2>
+    </script>
+    
+<script type="text/javascript">
+    const app = new Vue({
+        el: "#app",
+        data: {
+            num: 666,
+        },
+        /*  ----------------  写法一  --------------------
+        template: `
+            <h2 style="color: red">我是 Vue 选项模板</h2>
+        `*/
+
+        /*  ----------------  写法二  --------------------
+        template: "#tmp2",*/
+
+        template: "#tmp3",
+    });
+</script>
+</body>
+</html>
