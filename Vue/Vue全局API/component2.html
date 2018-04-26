@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>component2 ----- prop</title>
+    <script src="../lib/vue221.js"></script>
+</head>
+<body>
+    <h1>component2 ----- prop</h1>
+    <hr>
+
+    <div id="app">
+        {{msg}}
+        
+        <login username="张三"></login>
+        <login v-bind:username="msg"></login>
+        <!--<login user-name="张三"></login>-->
+    </div>
+</body>
+<script type="text/javascript">
+    const app = new Vue({
+        el: "#app",
+        data: {
+            msg: "王老五"
+        },
+        components: {
+            "login": {
+                template: "<h3 style='color: skyblue;'>用户 {{ username }} 成功登陆</h3>",
+                props: ['username']
+                /*props: ['userName']   如果上面是用-连接的 这里要用驼峰命名 插值表达式同理*/
+            }
+        }
+    });
+</script>
+
+</html>
