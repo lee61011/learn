@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Component 父子组件关系</title>
+    <script src="../lib/vue221.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>Component 父子组件关系</h1>
+        <hr>
+
+        {{msg}}
+        <login></login>
+    </div>
+</body>
+<script type="text/javascript">
+    var sunComponent = {
+        template: `
+            <div>
+                <h3 style="color: orange;">子组件</h3>
+            </div>
+        `
+    };
+
+    var loginComponent = {
+        template: `
+            <div>
+                <h3 style='color: skyblue'>用户 张三 成功登陆</h3>
+
+                <subcom></subcom>
+            </div>
+        `,
+        components: {
+            "subcom": sunComponent,
+        }
+    };
+
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            msg: "hello"
+        },
+        components: {
+            "login": loginComponent,
+        }
+    });
+</script>
+</html>

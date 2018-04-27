@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>component4</title>
+    <script src="../lib/vue221.js"></script>
+</head>
+<body>
+    <h1>component4</h1>
+    <hr>
+
+    <div id="app">
+        <!--<input type="text" name="component" list="cList" placeholder="请选择" v-model="com">
+        <datalist id="cList">
+            <option value="componentA"></option>
+            <option value="componentB"></option>
+            <option value="componentC"></option>
+        </datalist>-->
+        <component v-bind:is="com"></component>
+
+        <br><br><br>
+        <button @click="changeComponent">改变 Component</button>
+    </div>
+</body>
+<script type="text/javascript">
+    var componentA = {
+        template: `<h3 style="color: red;">This is componentA</h3>`
+    };
+    var componentB = {
+        template: `<h3 style="color: green;">This is componentB</h3>`
+    };
+    var componentC = {
+        template: `<h3 style="color: blue;">This is componentC</h3>`
+    }
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            /*com: "",*/
+            com: "componentA"
+        },
+        components: {
+            "componentA": componentA,
+            "componentB": componentB,
+            "componentC": componentC,
+        },
+        methods: {
+            changeComponent: function () {
+                if ( this.com == "componentA" ) {
+                    this.com = "componentB";
+                } else if ( this.com == "componentB" ) {
+                    this.com = "componentC";
+                } else {
+                    this.com = "componentA";
+                };
+            },
+        }
+    });
+</script>
+
+</html>
