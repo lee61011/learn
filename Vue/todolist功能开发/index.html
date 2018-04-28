@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todolist</title>
+    <script src="../Vue-基本指令/lib/vue221.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="inputVal">
+        <button @click="subData">提交</button>
+
+        <!-- 使用 v-for 在页面中渲染 input 中输入并提交的内容
+        <ul>
+            <li v-for="item in lists">{{item}}</li>
+        </ul>  -->
+
+        <ul>
+            <todo-item
+                    v-for="( item, index ) in lists"
+                    :content="item"
+                    :index="index"
+                    @delete="delData"
+            ></todo-item>
+        </ul>
+    </div>
+
+    <script type="text/javascript">
+
+        Vue.component('todo-item',{
+            props: ['content','index'],             //  接受父组件传递过来的 content
+            template: "<li @click='delData'>{{content}}</li>",
+            methods: {
+                delData: function () {
+                    this.$emit("delete", this.index)    //  将点击选项的索引通过 $emit 传递给父组件     delete ==> 23行 @delete  ==> 父组件中的 delData
+                },
+            }
+        })
+
+        const app = new Vue({
+            el: "#app",
+            data: {
+                inputVal: "",
+                lists: [],
+            },
+            methods: {
+                /*    提交功能      */
+                subData: function () {
+                    this.lists.push( this.inputVal );   //  将数据追加到数组中
+                    this.inputVal = "";                 //  清空输入框内容
+                },
+                delData: function ( index ) {
+                    this.lists.splice(index,1);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
