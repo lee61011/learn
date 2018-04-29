@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>propsData Option</title>
+    <script src="../lib/vue221.js"></script>
+</head>
+<body>
+    <h1>propsData Option</h1>
+    <hr>
+
+    <header></header>
+</body>
+<script type="text/javascript">
+
+    /*const app = new Vue({
+        el: "#app",
+        data: {
+            msg: "hello",
+        }
+    });*/
+    var header_a = Vue.extend({
+        template: "<h2 style='color: skyblue;'> {{msg}} --- {{a}} </h2>",
+        data: function () {
+            return {
+                msg: "Hello, I am header_a",
+            };
+        },
+        props: ["a"],
+    });
+
+    /*new header_a().$mount("header");*/
+    new header_a({propsData: {a: 666}}).$mount("header");
+    /*使用 {propsData: {a: 666}} 传参*/
+</script>
+
+</html>
