@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Computed Option 计算属性</title>
+    <script src="../lib/vue221.js"></script>
+</head>
+<body>
+    <h1>Computed Option 计算属性</h1>
+    <p style="color: #cccccc;"> computed 的作用主要是对原数据进行改造输出. 改造输出: 包括格式的编辑, 大小写转换, 顺序重排, 添加符号... ... </p>
+    <hr>
+
+    <div id="app">
+        <h3> {{newPrice}} </h3>
+        <br>
+        <h4>翻转新闻列表</h4>
+        <ul>
+            <li v-for="item in reversNews">{{item.title}} ------ {{item.date}}</li>
+        </ul>
+    </div>
+
+</body>
+<script type="text/javascript">
+    var newsList = [
+        {title: '美英法三国对叙利亚精确打击之后...', date: "2018.01.01"},
+        {title: '生活中的小技巧...', date: "2018.01.02"},
+        {title: '神奇的朋友圈...', date: "2018.01.03"},
+        {title: '程序员让计算机替自己完成工作...', date: "2018.01.04"},
+        {title: '小孩子被打,该不该教他还手...', date: "2018.01.05"},
+    ]
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            price: 100,
+            newsList: newsList,
+        },
+        /* 使用 computed 计算属性可以避免原始数据污染 */
+        computed: {
+            newPrice: function () {
+                return this.price = '￥ ' + this.price + ' 元';
+            },
+            reversNews: function () {
+                return this.newsList.reverse();
+            }
+        }
+    });
+</script>
+</html>
