@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Methods Option</title>
+    <script src="../lib/vue221.js"></script>
+</head>
+<body>
+    <h1>Methods Option</h1>
+    <hr>
+    <div id="app">
+        {{msg}}
+        <br>
+        <button @click="add('5')">ADD</button>
+
+        <!--    组件不能直接调用构造器中的方法,需要 加上native
+        <btn @click="add(6)"></btn>-->
+        <btn @click.native="add(6)"></btn>
+    </div>
+
+    <!-- 构造器外部使用 app.方法名 调用构造器内的方法 -->
+    <button onclick="app.add(2)">外部ADD</button>
+</body>
+<script type="text/javascript">
+    var btn = {
+        template: "<button>组件ADD</button>"
+    }
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            msg: 111
+        },
+        components: {
+            "btn": btn,
+        },
+        methods: {
+            add: function (num) {
+                if ( num != '' && typeof num == "number") {
+                    this.msg += num;
+                } else {
+                    this.msg++;
+                }
+            }
+        }
+    });
+</script>
+</html>
