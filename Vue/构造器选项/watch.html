@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Watch Option</title>
+    <script src="../lib/vue221.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h2 style="color: skyblue;">今日温度: {{temperature}} ℃</h2>
+        <h3 style="color: orange;">穿衣建议: {{suggest}}</h3>
+
+        <p>
+            <button @click="add">temADD</button>
+            <button @click="down">temDown</button>
+        </p>
+    </div>
+</body>
+<script type="text/javascript">
+    const suggestArray = ["短袖","长袖运动服","羽绒服"]
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            temperature: 15,
+            suggest: "长袖运动服",
+        },
+        methods: {
+            add: function () {
+                this.temperature += 5;
+            },
+            down: function () {
+                this.temperature -= 5;
+            }
+        },
+        /*watch: {
+            temperature: function (newVal, oldVal) {
+                if ( newVal > 26 ) {
+                    this.suggest = suggestArray[0];
+                } else if ( newVal < 26 && newVal > 0 ) {
+                    this.suggest = suggestArray[1];
+                } else {
+                    this.suggest = suggestArray[2];
+                }
+            }
+        }*/
+    });
+
+    /*          写在构造器外面         */
+    app.$watch("temperature",function (newVal, oldVal) {
+        if ( newVal > 26 ) {
+            this.suggest = suggestArray[0];
+        } else if ( newVal < 26 && newVal > 0 ) {
+            this.suggest = suggestArray[1];
+        } else {
+            this.suggest = suggestArray[2];
+        }
+    });
+</script>
+
+</html>
