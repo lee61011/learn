@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>sessionStorage的使用</title>
+    <style>
+        div {
+            margin-top: 100px;
+        }
+    </style>
+</head>
+<body>
+sessionStorage的使用: <br>
+姓名:
+<input type="text" name="userName" id="userName" placeholder="请输入姓名"> <br>
+<input type="button" value="设置数据" id="setData">
+<input type="button" value="获取数据" id="getData">
+<input type="button" value="删除数据" id="removeData">
+
+<div>
+    <p>存储数据到本地: 存储容量 5M 左右;  这个数据是存储在当前页面的内存中</p>
+    <p>setItem(key, value): 存储数据,以键值对的方式存储</p>
+    <p>getItem(key): 获取数据,通过指定名称的 key 获取对应的 value 值</p>
+    <p>removeItem(key): 删除数据,通过指定名称的 key 删除对应的值</p>
+    <p>clear(): 清空所有存储的内容</p>
+</div>
+</body>
+<script>
+    /*存储数据*/
+    document.querySelector("#setData").onclick = function () {
+        /*获取用户名*/
+        var name = document.querySelector("#userName").value;
+        /*存储数据*/
+        window.sessionStorage.setItem("userName", name);
+    }
+    /*获取数据*/
+    document.querySelector("#getData").onclick = function () {
+        var name = window.sessionStorage.getItem("userName");
+        alert(name);
+    }
+    /*移除数据*/
+    document.querySelector("#removeData").onclick = function () {
+        window.sessionStorage.removeItem("userName");
+    }
+</script>
+
+</html>

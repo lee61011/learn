@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>localStorage的使用</title>
+    <style>
+        div{
+            margin-top: 100px;
+        }
+    </style>
+</head>
+<body>
+localStorage的使用: <br>
+姓名:
+<input type="text" id="userName" placeholder="请输入用户名">
+<input type="button" value="设置数据" id="setData">
+<input type="button" value="获取数据" id="getData">
+<input type="button" value="删除数据" id="removeData">
+
+<div>
+    <p>存储数据到本地: 存储容量 20M 左右;  这个数据是存储在当前页面的内存中
+        <ul>
+            <li>1. 存储的内容大概 20M 左右</li>
+            <li>2. 不同浏览器不能共享数据. 但是统一浏览器的不同窗口可以共享数据</li>
+            <li>3. 永久生效,他的数据是存储在硬盘上的,并不会随着页面的关闭而清除</li>
+        </ul>
+    </p>
+    <p>setItem(key, value): 存储数据,以键值对的方式存储</p>
+    <p>getItem(key): 获取数据,通过指定名称的 key 获取对应的 value 值</p>
+    <p>removeItem(key): 删除数据,通过指定名称的 key 删除对应的值</p>
+    <p>clear(): 清空所有存储的内容</p>
+</div>
+
+<script>
+    /*存储数据*/
+    document.querySelector("#setData").onclick = function () {
+        var name = document.querySelector("#userName").value;
+        window.localStorage.setItem("userName",name);
+    }
+    /*获取数据*/
+    document.querySelector("#getData").onclick = function () {
+        var name = window.localStorage.getItem("userName");
+        alert(name);
+    }
+    document.querySelector("#removeData").onclick = function () {
+        window.localStorage.removeItem("userName");
+    }
+</script>
+</body>
+</html>
