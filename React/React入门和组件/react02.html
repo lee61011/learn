@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>react02</title>
+</head>
+<body>
+<div id="reactContainer"></div>
+<script src="./common/react.js"></script>
+<script src="./common/react-dom.js"></script>
+<script src="https://cdn.bootcss.com/babel-core/5.8.38/browser.js"></script>
+
+<script type="text/babel">      //  转换 jsx 语法
+    const HelloComponent = React.createClass({
+       render: function () {
+           return <h1>Hello { this.props.name }</h1>    //  使用 {} 传值   支持三元表达式
+       },
+    });
+
+    ReactDOM.render(
+            <HelloComponent name="React"/>,
+            document.getElementById('reactContainer')
+    );
+</script>
+</body>
+</html>
