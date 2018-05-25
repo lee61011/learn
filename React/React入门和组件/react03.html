@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JSX语法</title>
+</head>
+<body>
+<div id="reactContainer"></div>
+<script src="./common/react.js"></script>
+<script src="./common/react-dom.js"></script>
+<script src="https://cdn.bootcss.com/babel-core/5.8.38/browser.js"></script>
+
+<script type="text/babel">
+    let names = ['张三', '李四', '王老五'];
+    const HelloComponent = React.createClass({
+        render: function () {
+            return <div>
+                { names.map(function (name) {
+                    return <div key={name}>Hello {name}</div>
+                }) }
+            </div>
+        }
+    });
+    ReactDOM.render(
+            <HelloComponent name="小明"/>,
+            document.getElementById('reactContainer')
+    )
+</script>
+
+<!--<script type="text/babel">
+    let arr = [
+            <h2 key="1">Hello World</h2>,
+            <h2 key="2">Hello React</h2>
+    ];
+    ReactDOM.render(
+            <div>{arr}</div>,
+            document.getElementById('reactContainer')
+    )
+</script>-->
+
+</body>
+</html>
