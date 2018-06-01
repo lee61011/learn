@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React表单name复用</title>
+    <script src="./common/react.js"></script>
+    <script src="./common/react-dom.js"></script>
+    <!-- 在浏览器环境中解析 jsx 语法 -->
+    <script src="https://cdn.bootcss.com/babel-core/5.8.38/browser.js"></script>
+</head>
+<body>
+<div id="reactContainer"></div>
+
+<script type="text/babel">
+    const MyForm = React.createClass({
+        //  初始化状态
+        getInitialState: function () {
+            return{
+                username: '',
+                gender: 'man',
+                checked: true
+            }
+        },
+
+        handleChange: function (name, event) {
+            let newState = {};
+            //  newState[name] = name=='checked'?event.target.checked:event.target.value;    变动如下  html 标签中必须要有 name 属性
+            newState[event.target.name] = event.target.name=='checked'?event.target.checked:event.target.value;
+            this.setState(newState);
+            console.log(newState);
+        },
+
+        submitHandler: function (e) {
+            e.preventDefault();         //  阻止表单默认提交事件
+            let is = this.state.checked?'是':'不是';
+            let gender = this.state.gender=='man'?'帅哥':'美女';
+            alert(this.state.username + is + gender + "!");
+        },
+
+        render: function () {
+            /* 注意这里要使用 htmlFor 绑定 username
+             *  在下面的 html 代码中添加 <!-- --> 这种注释会报语法错误*/
+            return(<form onSubmit={this.submitHandler}>
+
+                        <label htmlFor="username">请输入姓名:</label>
+                        <input type="text" name="username" id="username" onChange={this.handleChange.bind(this,'username')} value={this.state.username} />
+                        <br />
+                        <label htmlFor="checkbox">是或否:</label>
+                        <input type="checkbox" name="checked" id="checkbox" value="是否" onChange={this.handleChange.bind(this,"checked")} checked={this.state.checked} />
+                        <br />
+                        <label htmlFor="username">请选择:</label>
+                        <select name="gender" onChange={this.handleChange.bind(this,"gender")} value={this.state.gender} >
+                            <option value="man">帅哥</option>
+                            <option value="woman">美女</option>
+                        </select>
+                        <br />
+                        <input type="submit" value="提交表单" />
+                    </form>
+            )
+        }
+    });
+
+    ReactDOM.render(
+            <MyForm />,
+            document.getElementById('reactContainer')
+    )
+</script>
+</body>
+</html>
