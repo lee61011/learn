@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>props属性验证</title>
+    <script src="./common/react.js"></script>
+    <script src="./common/react-dom.js"></script>
+    <script src="https://cdn.bootcss.com/babel-core/5.8.38/browser.js"></script>
+</head>
+<body>
+<div id="reactContainer"></div>
+
+<script type="text/babel">      //  转换 jsx 语法
+const MyComponents = React.createClass({
+    handleClick: function () {
+        this.refs.myTextInput.focus();
+    },
+
+    render: function () {
+        return (                    //  这里的 ref 相当于 id
+                <div>
+                    <input type="text" ref="myTextInput" />
+                    <button onClick={this.handleClick}>获取焦点</button>
+                </div>
+        )
+    }
+});
+
+    ReactDOM.render(
+            <MyComponents />,
+            document.getElementById('reactContainer')
+    )
+
+</script>
+</body>
+</html>
