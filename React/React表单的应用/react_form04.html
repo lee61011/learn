@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React表单--不可控组件</title>
+    <script src="./common/react.js"></script>
+    <script src="./common/react-dom.js"></script>
+    <!-- 在浏览器环境中解析 jsx 语法 -->
+    <script src="https://cdn.bootcss.com/babel-core/5.8.38/browser.js"></script>
+</head>
+<body>
+<div id="reactContainer"></div>
+
+<script type="text/babel">
+    const MyForm = React.createClass({
+        //  初始化状态
+
+        handleChange: function () {
+            let inputValue = ReactDOM.findDOMNode(this.refs.zhangsan).value;
+            console.log(inputValue);
+        },
+
+        render: function () {
+            /* 注意这里要使用 htmlFor 绑定 username
+             *  在下面的 html 代码中添加 <!-- --> 这种注释会报语法错误*/
+
+            /*   使用 defaultValue 来绑定默认值   */
+            return(
+                    <div>
+                        <input type="text" onChange={this.handleChange} ref="zhangsan" defaultValue="张三"/>
+                    </div>
+            )
+        }
+    });
+
+    ReactDOM.render(
+            <MyForm />,
+            document.getElementById('reactContainer')
+    )
+</script>
+</body>
+</html>
