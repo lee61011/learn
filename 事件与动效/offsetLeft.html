@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>offsetLeft</title>
+    <style>
+        #one {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background-color: #cccccc;
+            margin: 100px;              /*不包括*/
+            border: 10px;               /*不包括*/
+            padding: 10px;              /*包括*/
+        }
+        #two {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            margin: 10px;               /*包括*/
+            border: 10px;               /*不包括*/
+            padding: 10px;              /*不包括*/
+        }
+    </style>
+</head>
+<body>
+<div id="one">
+    <div id="two"></div>
+</div>
+
+<script>
+    var two = document.getElementById('two');
+
+    /*
+    *   offsetLeft 是只身 border 左侧到 父元素(带定位的) border 右侧的距离
+    *       也就是 自身的 marginLeft + 父元素的 paddingRight
+    * */
+    console.log(two.offsetLeft);        //  20
+</script>
+</body>
+</html>
