@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>offsetHeight和style.height的区别</title>
+    <style>
+        #demo {
+            /*
+                offsetHeight = height + padding + border;
+            */
+
+            width: 200px;
+            height: 200px;                  /*包括 height */
+            padding: 10px;                  /*包括 padding */
+            border: 10px solid red;         /*包括 border */
+            margin: 10px;              /*不包括 margin */
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+<div id="demo">
+
+</div>
+
+<script>
+    let demo = document.getElementById('demo');
+
+    //  获取
+    console.log(demo.style.height);     //  只能获取行内样式  且输出是字符串 有单位
+    console.log(demo.offsetHeight);     //  获取元素的高度 输出是数值
+
+    //  设置
+    demo.style.height = 300 + 'px';     //  可以设置元素的行内样式
+    //  demo.offsetHeight = 600;        //  只读属性 不可以设置
+</script>
+</body>
+</html>
