@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML5-属性选择器</title>
+    <style>
+        .red {
+            color: red;
+        }
+        .blue {
+            color: blue;
+        }
+        .pink {
+            color: pink;
+        }
+        .darkred {
+            color: darkred;
+        }
+        .blueviolet {
+            color: blueviolet;
+        }
+        /*   属性选择器: 属性是相对于标签而言的. 所谓属性选择器就是根据指定名称的属性的值来查找元素   */
+
+        /*   1. E[attr]: 查找指定的拥有 attr 属性的 E 标签.
+            如: 查找拥有 style 属性的 li 标签   */
+        li[style] {
+            text-decoration: underline;
+        }
+
+        /*   2. E[attr=value]: 查找拥有指定的 Attr 属性并且属性值为 value 的 E 标签.
+           如: 想查找拥有 class 属性并且值为 red 的 li 标签
+           */
+        li[class=red] {
+            font-size: 30px;
+        }
+
+        /*
+            3. E[attr*=value]: 查找拥有指定的 attr 属性并且属性值中包含 value 的 E 标签.
+        */
+        li[class*=red] {
+            font-size: 20px;
+        }
+
+        /*
+            4. E[attr^=value]: 查找拥有指定的 attr 属性并且属性值以 value 开头的 E 标签.
+        */
+        li[class^=blue] {
+            font-size: 26px;
+        }
+
+        /*
+            5. E[attr$=value]: 查找拥有指定的 attr 属性并且属性值以 value 结束的 E 标签.
+        */
+        li[class$=red] {
+            font-size: 26px;
+        }
+
+    </style>
+</head>
+<body>
+<p style="">这个是带有 style 属性的 p 标签</p>
+<ol>
+    <li class="red" style="">锋利的jQuery</li>
+    <li class="blue">红宝书</li>
+    <li class="pink" style="">犀牛书</li>
+    <li class="blue">ES6标准入门</li>
+    <li class="darkred">Node.JS</li>
+    <li class="blueviolet">Vue.JS</li>
+</ol>
+</body>
+</html>
