@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML5--兄弟选择器</title>
+    <style>
+        .first {
+            color: red;
+        }
+        /* 
+            兄弟伪类:
+            +: 获取当前元素的相邻的满足条件的元素
+            ~: 获取当前元素的满足条件的兄弟元素
+         */
+
+         /* 下面这句样式说明查找: 添加了 .first 样式的标签的相邻的 li 元素
+            1. 必须相邻
+            2. 必须是指定类型的元素
+          */
+          .first + li {
+              color: blue;
+          }
+
+          /* 下面的样式查找添加了 .first 样式的元素的所有兄弟 li 元素 
+            1. 必须是指定类型的元素
+            */
+          .first ~ li {
+            color: green;
+          }
+    </style>
+</head>
+<body>
+    <ul>
+        <li class="first">Vue.js</li>
+        <span>这里是一个 span 元素</span>
+        <li>Angular.js</li>
+        <li>React.js</li>
+        <li>微信小程序</li>
+        <li>JS高级程序设计第三版</li>
+    </ul>
+</body>
+</html>
