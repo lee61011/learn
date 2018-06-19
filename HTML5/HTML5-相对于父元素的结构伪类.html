@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML5-相对于父元素的结构伪类</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul {
+            width: 700px;
+            height: 500px;
+            margin: 0 auto;
+            margin-top: 100px;
+            list-style: none;
+            border-left: 1px solid #ccc;
+            border-top: 1px solid #ccc;
+        }
+        ul > li {
+            float: left;
+            width: 100px;
+            box-sizing: border-box;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            background-color: #fff;
+            border-right: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+        }
+
+        /* 相对于父元素的结构伪类 */
+
+        /* E:first-child
+           查找 E 元素的父级元素中的第一个 E 元素
+           1. 相对于当前指定元素的父元素
+           2. 查找的类型必须是指定的类型  */
+        li:first-child{
+            color: red; /* 查找 li 的父元素中的第一个 li 元素 */
+        }
+        /* E:last-child
+           查找 E 元素的父元素中的最后一个指定类型的子元素  */
+        li:last-child{
+            background-color: skyblue;
+        }
+
+
+        /* 查找的时候限制类型 */
+        /* 1. 也是相对于父元素
+           2. 在查找的时候只会查找满足类型条件的元素  */
+        li:first-of-type{
+            color: red;
+        }   
+        li:last-of-type{
+            color: greed;
+        }
+
+
+        /* 指定索引位置 nth-child( 从1开始的索引 || 关键字 || 表达式 ) */
+        li:nth-child(4) {
+            background-color: skyblue;
+        }
+
+        /* 偶数个元素添加背景       even: 偶数  odd: 奇数 */
+        /* li:nth-child(even) {
+            background-color: orange;
+        }
+        li:nth-child(odd){
+            background-color: pink;
+        } */
+        li:nth-of-type(even){
+            background-color: orange;
+        }
+        li:nth-of-type(odd){
+            background-color: pink;
+        }
+
+        /* 为前面的 5 个元素添加样式 */
+        /* 这种方式通常用来选取开头的多个元素与结尾的多个元素, 中间的无法选取 */
+        /* n: 默认取值范围为 0~子元素的长度     当 n<=0 时,选取无效 */
+        /* -n+5: 说明
+           -0 >> 5
+           -1 >> 4
+           -2 >> 3
+           -3 >> 2
+           -4 >> 1
+           -5 >> 0 >> 无效  */
+        li:nth-of-type(-n+5) {
+            font-size: 30px;
+        }
+        li:nth-last-of-type(-n+5) {
+            font-size: 30px;
+        }
+
+
+        /* 空值: 没有任何的内容, 连空格都没有 */
+        li:empty {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <div></div>
+        <li></li>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+        <li>11</li>
+        <li>12</li>
+        <li>13</li>
+        <li>14</li>
+        <li>15</li>
+        <li>16</li>
+        <li>17</li>
+        <li>18</li>
+        <li>19</li>
+        <li>20</li>
+        <li>21</li>
+        <li>22</li>
+        <li>23</li>
+        <li>24</li>
+        <li>25</li>
+        <li>26</li>
+        <li>27</li>
+        <li>28</li>
+        <li>29</li>
+        <li>30</li>
+        <li>31</li>
+        <li>32</li>
+        <li>33</li>
+        <li>34</li>
+        <li>35</li>
+    </ul>
+</body>
+</html>
