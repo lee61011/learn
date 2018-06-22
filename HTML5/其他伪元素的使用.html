@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /* 首字下沉 */
+        p::first-letter {       /* 通过 first-letter 取到第一个值 */
+            /* 首字母样式 */
+            color: red;
+            font-size: 30px;
+            float: left; /* 文本环绕 */
+        }
+
+        /* 获取第一行内容 
+           如果设置了 first-letter, 那么无法同时设置他的样式 */
+        p::first-line {
+            text-decoration: underline;
+        }
+
+        /* 设置当前选中内容的样式 */
+        p::selection {
+            background-color: orange;
+            color: blue;
+            /* 只能设置显示的样式, 不能设置内容的大小 */
+            /* font-size: 30px; */
+        }
+    </style>
+</head>
+<body>
+    <p>abc 高级程序设计  Vue.js实战  微信小程序入门  React.js <br> Angular.js  JS语言精粹  Node.js</p>
+</body>
+</html>
