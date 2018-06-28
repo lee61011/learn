@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .box {
+            width: 400px;
+            height: 200px;
+            background-color: #ccc;
+            margin: 100px auto;
+        }
+        .left {
+            /* 默认情况下, width 仅仅是内容的宽度 */
+            width: 200px;
+            height: 100%;
+            background-color: red;
+            float: left;
+            /* 添加内间距 */
+            padding-left: 10px;
+            border-right: 10px solid green;
+            /* 添加右边框 */
+            /* border-right: 3px solid green; */
+            
+            /* 设置盒模型 */
+            /* content-box: 设置的 width 属性值仅仅是内容的宽度,盒子的最终宽度值在 width 的基础上在加上 padding 和 border 的宽度 */
+            /* border-box: 设置的 width 属性值就是盒子的最终宽度, 包含了 border && padding && 内容; 如果添加了 padding 和 border, 那么真正放置内容的区域会减小-----这种盒模型方式可以稳固页面结构 */
+            box-sizing: border-box;
+        }
+        .right {
+            width: 200px;
+            height: 100%;
+            background-color: blue;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="left"></div>
+        <div class="right"></div>
+    </div>
+</body>
+</html>
