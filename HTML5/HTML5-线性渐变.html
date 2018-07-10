@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            width: 300px;
+            height: 300px;
+            /* 添加渐变色: 渐变不是一个单一色,他产生的是图像,所以需要使用 background */
+            /* linear-gradient(方向, 开始颜色 位置, 颜色2 位置, 颜色3 位置, ...) */
+            /* 方向:
+                to top: 0 deg
+                to right: 90 deg
+                to bottom: 180 deg
+                to left: 270deg
+             */
+            background: linear-gradient(to right, red,blue);
+
+        }
+    </style>
+</head>
+<body>
+    <!-- linear-gradient 线性渐变指沿着某条直线朝一个方向产生渐变效果 -->
+    <!-- 语法:
+         linear-gradient{[<point> || <angle>,]? <stop> [, <stop>]* }  -->
+    <!-- 参数说明:
+        第一个参数表示线性渐变的方向:
+            1. to left: 设置渐变为从右到左.相当于 270 deg
+            2. to right: 设置渐变从左到右,相当于 90 deg
+            3. to top: 设置渐变常下到上,相当于 0 deg
+            4. to bottom: 设置渐变从上到下,相当于 180 deg,这是默认值,等同于留空不写.也可以直接指定度数,如 45 deg  
+        第二个参数是起点颜色,可以指定颜色的位置
+        第三个参数是重点颜色,还可以在后面添加更多的参数,表示多种颜色的渐变  -->
+
+
+<div></div>
+
+<script type="text/javascript">
+
+</script>
+
+
+
+
+</body>
+</html>
