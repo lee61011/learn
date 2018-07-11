@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            width: 300px;
+            height: 300px;
+            /* 添加径向渐变; 产生也是图像 */
+            /* background: radial-gradient(red,blue); */
+            /* 语法: radial-gradient (形状 大小 坐标):
+                形状 shape: circle; 产生正方形的渐变色
+                    ellipse: 适配当前的形状 如果是正方形的形状,两种效果一样
+                at position: 坐标, 默认在正中心, 可以赋值坐标, 也可以赋值关键字( left, center, right, top, bottom )  */
+            background: radial-gradient(circle,red,blue);
+            /* background: radial-gradient(at 50px 50px, red, blue); */
+            /* background: radial-gradient(at left top, red, blue); */
+            /* 最近边 */
+            /* background: radial-gradient(circle closest-side circle,red,blue); */
+            /* 最近角 */
+            /* background: radial-gradient(circle closest-corner circle,red,blue); */
+            /* 最远边 */
+            /* background: radial-gradient(circle closest-side circle,red,blue); */
+
+            /* 设置颜色的位置 */
+            background: radial-gradient(red,red,50%,blue,50%,blue);
+        }
+    </style>
+</head>
+<body>
+    <!-- radial-gradient 径向渐变指从一个中心点开始沿着四周产生渐变效果 -->
+    <!-- 语法:
+            <radial-gradient> - radial-gradient([<shape> || <size>] [at <position>]?, [at <position>,]? <color-stop>[, <color-stop>]+) -->
+    <!-- 取值:
+            <position> 确定圆心的位置,如果提供两个参数,第一个表示横坐标,第二个表示纵坐标,如果只提供一个,第二值默认为 50%,即 center
+            shape: 渐变的形状, ellipse 标志椭圆形, circle 表示圆形. 默认为 ellipse, 如果元素形状为正方形的元素, 则 ellipse 和 circle 显示一样
+            size: 渐变的大小,即渐变到哪里停止, 他有四个值. closest-side: 最近边; farthset-side: 最远边; closest-corner: 最近角; farthest-corner: 最远角; 默认是最远角 fathest-cormer
+            <color>: 指定颜色. rgba hsla -->             
+            
+<div></div>
+
+</body>
+</html>
