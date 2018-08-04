@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            margin-left: 200px;
+            /* 添加过渡效果 */
+            transition: transform 2s;
+        }
+        div:active {
+            /* 使用 transform 实现元素的移动  
+                    a: 移动是参照元素的左上角
+                    b: 执行完毕之后会恢复到原始状态
+                1. 如果只有一个参数就代表 x 方向
+                2. 如果有两个参数就代表 x/y 方向
+            */
+            /* transform: translate(100px); */
+            /* transform: translate(400px,500px); */
+            /* transform: translate(0px,500px); */
+
+            /* 添加水平或垂直方向的移动 */
+            /* transform: translateX(300px); */
+            transform: translateY(300px);
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <div></div>
+</body>
+</html>
