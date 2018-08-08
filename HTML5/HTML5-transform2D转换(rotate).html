@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            margin-left: 200px;
+            margin-top: 10px;
+            /* 添加过渡效果 */
+            transition: transform 2s;
+        }
+
+        /* 移动 translate */
+
+        div:first-of-type:active {
+            /* 使用 transform 实现元素的移动  
+                    a: 移动是参照元素的左上角
+                    b: 执行完毕之后会恢复到原始状态
+                1. 如果只有一个参数就代表 x 方向
+                2. 如果有两个参数就代表 x/y 方向
+            */
+            /* transform: translate(100px); */
+            /* transform: translate(400px,500px); */
+            /* transform: translate(0px,500px); */
+            /* 添加水平或垂直方向的移动 */
+            /* transform: translateX(300px); */
+            transform: translateY(300px);
+        }
+
+        /* 缩放 scale */
+
+        div:nth-of-type(2):active {
+            /* 实现缩放 1指不缩放, >1.01 放大, <0.99缩小 参照元素的几何中心
+                1. 如果只有一个参数,就代表 x 和 y 方向都进行相等比例的缩放
+                2. 如果有两个参数,就代表 x/y 方向
+            */
+            /* transform: scale(2) */
+            /* transform: scale(2,1); */
+            /* 缩放指定的方向 */
+            transform: scaleX(0.5);
+            transform: scaleY(0.5);
+        }
+
+        /* 旋转: rotate */
+        div:nth-of-type(3):active {
+            /* 围绕 Z 轴进行旋转 */
+            /* transform: rotate(30deg); */
+            transform: rotate(-30deg);
+        }
+
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+</body>
+
+</html>
