@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id='canvas' width="600" height="400"></canvas>
+
+    <script>
+        let canvas = document.getElementById('canvas');
+        let ctx = canvas.getContext('2d');
+        let step = 10,
+        start = 100;
+
+        /* //  绘制第一个直线段
+        ctx.moveTo(100, 100);
+        ctx.lineTo(110, 100);
+        //  空一段
+
+        //  在绘制一段, 从 120 开始
+        ctx.moveTo(120, 100);
+        ctx.lineTo(130, 100);
+        
+        //  一直绘制下去, 当 moveTo 的 x 超过 500 的时候停下来 */
+
+        while ( true ) {
+            if ( start >= 500 ) break;
+
+            //  绘制虚线的实线部分
+            ctx.moveTo( start, 100);
+            ctx.lineTo( start += step, 100 );
+
+            //  绘制空白部分
+            start += step;
+        }
+
+        ctx.stroke();
+    </script>
+</body>
+</html>
