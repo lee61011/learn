@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id='canvas' width='600' height='400'></canvas>
+
+    <script>
+        let canvas = document.getElementById('canvas');
+        let ctx = canvas.getContext('2d');
+
+        //  绘制虚线
+        var stepX = 10, stepY = stepX * 2 / 3,
+            startX = 0, startY = 0;
+
+        while ( true ) {
+            if ( startX >= 600 || startY >= 400 ) break;
+
+            //  绘制虚线的实线部分
+            ctx.moveTo( startX, startY );
+            ctx.lineTo( startX+=stepX, startY+=stepY );
+
+            //  绘制空白部分
+            startX += stepX;
+            startY += stepY;
+        }
+
+        ctx.stroke();
+    </script>
+</body>
+</html>
