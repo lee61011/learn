@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="400"></canvas>
+
+    <script>
+        //  ctx.fill()  
+        /* 调用 fill 方法会将所有的点连接起来, 并构成一个封闭的图形结构
+            若果所有的描点没有构成封闭结构, 也会将开始的起点与最终的店链接起来, 构成一个闭合的 图形, 并在里面填充颜色 (默认黑色)
+         */
+         let canvas = document.getElementById('canvas');
+         let ctx = canvas.getContext('2d');
+
+         ctx.moveTo(100,100);
+         ctx.lineTo(200,100);
+         ctx.lineTo(200,200);
+
+         // ctx.stroke();
+         ctx.fill();
+    </script>
+</body>
+</html>
