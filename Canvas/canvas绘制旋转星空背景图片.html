@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用 Canvas 绘制旋转星空背景图片</title>
+</head>
+<body>
+
+<!--    300 * 250    -->
+<script type="text/javascript">
+    /*   移动端适配   */
+    let vp1 = document.querySelector('meta[name="viewport"]');
+    if (vp1 == null) {
+        let meta1 = document.createElement('meta');
+        meta1.name = "viewport";
+        meta1.content = "width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0";
+        let head1 = document.getElementsByTagName('head')[0];
+        head1.appendChild(meta1);
+    }
+
+    function setAttr (name, {
+            width = '',
+            height = '',
+            top = '',
+            left = '',
+            bgc = '',
+            borr = '',
+            lnh = '',
+            pos = 'absolute',
+            color = '#fcfcfb',
+            tea = 'center'}) {
+
+        name.style.width = width + 'px';
+        name.style.height = height + 'px';
+        name.style.position = pos;
+        name.style.top = top + 'px';
+        name.style.left = left + "px";
+        name.style.color = color;
+
+        name.style.backgroundColor = bgc;
+        name.style.borderRadius = borr + 'px';
+        name.style.textAlign = tea;
+        name.style.lineHeight = lnh + 'px';
+    }
+
+    try {
+        //  console.log('进入 try 方法');
+        let container1 = document.createElement( 'div' );
+        container1.id = 'container1';
+        setAttr(container1, {width: 300, height: 250, pos: 'relative'})
+        let appName1 = document.createElement( 'h2' );
+        appName1.innerText = 'Musically';
+        appName1.style.font = 'bold 50px Heiti SC';
+        appName1.style.margin = 0;
+        setAttr(appName1, {top: 43, left: 32})
+        let btn1 = document.createElement( 'div' );
+        btn1.innerText = 'Download';
+        btn1.style.font = 'bold 22px Heiti SC';
+        setAttr(btn1, {width: 166, height: 42, top: 182, left: 67, bgc: '#f64e56', borr: 42, lnh: 42});
+
+        let canvas1 = document.createElement( 'canvas' );
+        canvas1.id = 'canvas1';
+
+        container.appendChild( canvas1 );
+        container.appendChild( appName1 );
+        container.appendChild( btn1 );
+        document.getElementsByTagName( 'head' )[0].nextElementSibling.appendChild( container );
+    } catch (e) {
+        document.write( '<div id="container1" style="width: 300px; height: 250px; position: relative; color: rgb(252, 252, 251); text-align: center;"><canvas id="canvas1" width="300" height="250"></canvas><h2 style="font: bold 50px \&quot;Heiti SC\&quot;; margin: 0px; position: absolute; top: 43px; left: 32px; color: rgb(252, 252, 251); text-align: center;">Musically</h2><div style="font: bold 22px/42px \&quot;Heiti SC\&quot;; width: 166px; height: 42px; position: absolute; top: 182px; left: 67px; color: rgb(252, 252, 251); background-color: rgb(246, 78, 86); border-radius: 42px; text-align: center;">Download</div></div>' );
+    };
+
+
+    /*   背景动效   */
+    function canvas(id,starscolor,starsamount,starsradius,movrange,speed,trailing){
+        var canvas = document.getElementById(id),
+                ctx = canvas.getContext('2d'),
+                w = canvas.width = 300,
+                h = canvas.height = 250,
+
+                hue = starscolor,
+                stars = [],
+                count = 0,
+                maxStars = starsamount;
+
+        var canvas2 = document.createElement('canvas'),
+                ctx2 = canvas2.getContext('2d');
+        canvas2.width = 100;
+        canvas2.height = 100;
+        var half = canvas2.width / 2,
+                gradient2 = ctx2.createRadialGradient(half, half, 0, half, half, half);
+
+        gradient2.addColorStop(0.025, '#CCC');
+        gradient2.addColorStop(0.1, 'hsl(' + hue + ', 61%, 33%)');
+        gradient2.addColorStop(0.25, 'hsl(' + hue + ', 64%, 6%)');
+        gradient2.addColorStop(1, 'transparent');
+
+        ctx2.fillStyle = gradient2;
+        ctx2.beginPath();
+        ctx2.arc(half, half, half, 0, Math.PI * 2);
+        ctx2.fill();
+
+        // End cache
+        function random(min, max) {
+            if (arguments.length < 2) {
+                max = min;
+                min = 0;
+            }
+            if (min > max) {
+                var hold = max;
+                max = min;
+                min = hold;
+            }
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function maxOrbit(x, y) {
+            var max = Math.max(x, y),
+                    diameter = Math.round(Math.sqrt(max * max + max * max));
+            return diameter / movrange;
+        }
+
+        var Star = function() {
+            this.orbitRadius = random(maxOrbit(w, h));
+            this.radius = random(starsradius, this.orbitRadius) / 8;
+
+            this.orbitX = w / 2;
+            this.orbitY = h / 2;
+            this.timePassed = random(0, maxStars);
+            this.speed = random(this.orbitRadius) / speed;
+
+            this.alpha = random(2, 10) / 10;
+
+            count++;
+            stars[count] = this;
+        }
+
+        Star.prototype.draw = function() {
+            var x = Math.sin(this.timePassed) * this.orbitRadius + this.orbitX,
+                    y = Math.cos(this.timePassed) * this.orbitRadius + this.orbitY,
+                    twinkle = random(10);
+            if (twinkle === 1 && this.alpha > 0) {
+                this.alpha -= 0.05;
+            } else if (twinkle === 2 && this.alpha < 1) {
+                this.alpha += 0.05;
+            }
+
+            ctx.globalAlpha = this.alpha;
+            ctx.drawImage(canvas2, x - this.radius / 2, y - this.radius / 2, this.radius, this.radius);
+            this.timePassed += this.speed;
+        }
+
+        for (var i = 0; i < maxStars; i++) {
+            new Star();
+        }
+
+        function animation() {
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.globalAlpha = trailing; //尾巴
+            ctx.fillStyle = 'hsla(' + hue + ', 64%, 6%, 2)';
+            ctx.fillRect(0, 0, w, h);
+            ctx.globalCompositeOperation = 'lighter';
+            for (var i = 1, l = stars.length; i < l; i++) {
+                stars[i].draw();
+            };
+
+            window.requestAnimationFrame(animation);
+        }
+        animation();
+    }
+    (function(){
+        canvas("canvas1",230,1000,60,2,50000,0.5);
+    })();
+</script>
+
+<!--    320 * 50    -->
+<script type="text/javascript">
+    /*   移动端适配   */
+    let vp2 = document.querySelector('meta[name="viewport"]');
+    if (vp2 == null) {
+        let meta2 = document.createElement('meta');
+        meta2.name = "viewport";
+        meta2.content = "width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0";
+        let head2 = document.getElementsByTagName('head')[0];
+        head2.appendChild(meta2);
+    }
+
+    function setAttr (name, {
+            width = '',
+            height = '',
+            top = '',
+            left = '',
+            bgc = '',
+            borr = '',
+            lnh = '',
+            pos = 'absolute',
+            color = '#fcfcfb',
+            tea = 'center'}) {
+
+        name.style.width = width + 'px';
+        name.style.height = height + 'px';
+        name.style.position = pos;
+        name.style.top = top + 'px';
+        name.style.left = left + "px";
+        name.style.color = color;
+
+        name.style.backgroundColor = bgc;
+        name.style.borderRadius = borr + 'px';
+        name.style.textAlign = tea;
+        name.style.lineHeight = lnh + 'px';
+    }
+
+    try {
+        let container2 = document.createElement( 'div' );
+        container2.id = 'container2';
+        setAttr(container2, {width: 320, height: 50, pos: 'relative'});
+        let appName2 = document.createElement( 'h2' );
+        appName2.innerText = 'Musically';
+        appName2.style.font = 'bold 30px Heiti SC';
+        appName2.style.margin = 0;
+        setAttr(appName2, {top: 3, left: 32});
+        let btn2 = document.createElement( 'div' );
+        setAttr(btn2, {width: 43, height: 43, bgc: '#f64e56', borr: 23, top: 3, left: 245});
+        let arrow2 = document.createElement( 'div' );
+        arrow2.style.borderWidth = '3px 3px 0 0';
+        arrow2.style.borderColor = '#fff';
+        arrow2.style.borderStyle = 'solid';
+        arrow2.style.transform = 'rotate(45deg)';
+        setAttr(arrow2, {width: 16, height: 16, top: 12, left: 8});
+        btn2.appendChild( arrow2 );
+
+        let canvas2 = document.createElement( 'canvas' );
+        canvas2.id = 'canvas2';
+
+        container.appendChild( canvas2 );
+        container.appendChild( appName );
+        container.appendChild( btn );
+        document.getElementsByTagName( 'head' )[0].nextElementSibling.appendChild( container );
+    } catch (e) {
+        document.write( '<div id="container2" style="width: 320px; height: 50px; position: relative; color: rgb(252, 252, 251); text-align: center;"><canvas id="canvas2" width="320" height="50"></canvas><h2 style="font: bold 30px \&quot;Heiti SC\&quot;; margin: 0px; position: absolute; top: 3px; left: 32px; color: rgb(252, 252, 251); text-align: center;">Musically</h2><div style="width: 43px; height: 43px; position: absolute; top: 3px; left: 245px; color: rgb(252, 252, 251); background-color: rgb(246, 78, 86); border-radius: 23px; text-align: center;"><div style="border-width: 3px 3px 0px 0px; border-color: rgb(255, 255, 255); border-style: solid; transform: rotate(45deg); width: 16px; height: 16px; position: absolute; top: 12px; left: 8px; color: rgb(252, 252, 251); text-align: center;"></div></div></div>' );
+    };
+
+
+    /*   背景动效   */
+    function canvas(id,starscolor,starsamount,starsradius,movrange,speed,trailing){
+        var canvas = document.getElementById(id),
+                ctx = canvas.getContext('2d'),
+                w = canvas.width = 320,
+                h = canvas.height = 50,
+
+                hue = starscolor,
+                stars = [],
+                count = 0,
+                maxStars = starsamount;
+
+        var canvas2 = document.createElement('canvas'),
+                ctx2 = canvas2.getContext('2d');
+        canvas2.width = 100;
+        canvas2.height = 100;
+        var half = canvas2.width / 2,
+                gradient2 = ctx2.createRadialGradient(half, half, 0, half, half, half);
+
+        gradient2.addColorStop(0.025, '#CCC');
+        gradient2.addColorStop(0.1, 'hsl(' + hue + ', 61%, 33%)');
+        gradient2.addColorStop(0.25, 'hsl(' + hue + ', 64%, 6%)');
+        gradient2.addColorStop(1, 'transparent');
+
+        ctx2.fillStyle = gradient2;
+        ctx2.beginPath();
+        ctx2.arc(half, half, half, 0, Math.PI * 2);
+        ctx2.fill();
+
+        // End cache
+        function random(min, max) {
+            if (arguments.length < 2) {
+                max = min;
+                min = 0;
+            }
+            if (min > max) {
+                var hold = max;
+                max = min;
+                min = hold;
+            }
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function maxOrbit(x, y) {
+            var max = Math.max(x, y),
+                    diameter = Math.round(Math.sqrt(max * max + max * max));
+            return diameter / movrange;
+        }
+
+        var Star = function() {
+            this.orbitRadius = random(maxOrbit(w, h));
+            this.radius = random(starsradius, this.orbitRadius) / 8;
+
+            this.orbitX = w / 2;
+            this.orbitY = h / 2;
+            this.timePassed = random(0, maxStars);
+            this.speed = random(this.orbitRadius) / speed;
+
+            this.alpha = random(2, 10) / 10;
+
+            count++;
+            stars[count] = this;
+        }
+
+        Star.prototype.draw = function() {
+            var x = Math.sin(this.timePassed) * this.orbitRadius + this.orbitX,
+                    y = Math.cos(this.timePassed) * this.orbitRadius + this.orbitY,
+                    twinkle = random(10);
+            if (twinkle === 1 && this.alpha > 0) {
+                this.alpha -= 0.05;
+            } else if (twinkle === 2 && this.alpha < 1) {
+                this.alpha += 0.05;
+            }
+
+            ctx.globalAlpha = this.alpha;
+            ctx.drawImage(canvas2, x - this.radius / 2, y - this.radius / 2, this.radius, this.radius);
+            this.timePassed += this.speed;
+        }
+
+        for (var i = 0; i < maxStars; i++) {
+            new Star();
+        }
+
+        function animation() {
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.globalAlpha = trailing; //尾巴
+            ctx.fillStyle = 'hsla(' + hue + ', 64%, 6%, 2)';
+            ctx.fillRect(0, 0, w, h);
+            ctx.globalCompositeOperation = 'lighter';
+            for (var i = 1, l = stars.length; i < l; i++) {
+                stars[i].draw();
+            };
+
+            window.requestAnimationFrame(animation);
+        }
+        animation();
+    }
+    (function(){
+        canvas("canvas2",230,1000,60,2,50000,0.5);
+    })();
+
+</script>
+
+<!--    728 * 90    -->
+<script type="text/javascript">
+    /*   移动端适配   */
+    let vp3 = document.querySelector('meta[name="viewport"]');
+    if (vp3 == null) {
+        let meta3 = document.createElement('meta');
+        meta3.name = "viewport";
+        meta3.content = "width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0";
+        let head3 = document.getElementsByTagName('head')[0];
+        head3.appendChild(meta3);
+    }
+
+    function setAttr (name, {
+            width = '',
+            height = '',
+            top = '',
+            left = '',
+            bgc = '',
+            borr = '',
+            lnh = '',
+            pos = 'absolute',
+            color = '#fcfcfb',
+            tea = 'center'}) {
+
+        name.style.width = width + 'px';
+        name.style.height = height + 'px';
+        name.style.position = pos;
+        name.style.top = top + 'px';
+        name.style.left = left + "px";
+        name.style.color = color;
+
+        name.style.backgroundColor = bgc;
+        name.style.borderRadius = borr + 'px';
+        name.style.textAlign = tea;
+        name.style.lineHeight = lnh + 'px';
+    }
+
+    try {
+        let container3 = document.createElement( 'div' );
+        container3.id = 'container3';
+        setAttr(container3, {width: 728, height: 90, pos: 'relative'});
+        let appName3 = document.createElement( 'h2' );
+        appName3.innerText = 'Musically';
+        appName3.style.font = 'bold 50px Heiti SC';
+        appName3.style.margin = 0;
+        setAttr(appName3, {top: 10, left: 110});
+        let btn3 = document.createElement( 'div' );
+        btn3.innerText = 'Download';
+        btn3.style.font = 'bold 18px Heiti SC';
+        setAttr(btn3, {width: 120, height: 40, bgc: '#f64e56', borr: 5, lnh: 40, top: 33, left: 492});
+
+        let canvas3 = document.createElement( 'canvas' );
+        canvas3.id = 'canvas3';
+
+        container.appendChild( canvas3 );
+        container.appendChild( appName3 );
+        container.appendChild( btn3 );
+        document.getElementsByTagName( 'head' )[0].nextElementSibling.appendChild( container );
+    } catch (e) {
+        document.write( '<div id="container3" style="width: 728px; height: 90px; position: relative; color: rgb(252, 252, 251); text-align: center;"><canvas id="canvas3" width="728" height="90"></canvas><h2 style="font: bold 50px \&quot;Heiti SC\&quot;; margin: 0px; position: absolute; top: 10px; left: 110px; color: rgb(252, 252, 251); text-align: center;">Musically</h2><div style="font: bold 18px/40px \&quot;Heiti SC\&quot;; width: 120px; height: 40px; position: absolute; top: 33px; left: 492px; color: rgb(252, 252, 251); background-color: rgb(246, 78, 86); border-radius: 5px; text-align: center;">Download</div></div>' );
+    };
+
+
+    /*   背景动效   */
+    function canvas(id,starscolor,starsamount,starsradius,movrange,speed,trailing){
+        var canvas = document.getElementById(id),
+                ctx = canvas.getContext('2d'),
+                w = canvas.width = 728,
+                h = canvas.height = 90,
+
+                hue = starscolor,
+                stars = [],
+                count = 0,
+                maxStars = starsamount;
+
+        var canvas2 = document.createElement('canvas'),
+                ctx2 = canvas2.getContext('2d');
+        canvas2.width = 100;
+        canvas2.height = 100;
+        var half = canvas2.width / 2,
+                gradient2 = ctx2.createRadialGradient(half, half, 0, half, half, half);
+
+        gradient2.addColorStop(0.025, '#CCC');
+        gradient2.addColorStop(0.1, 'hsl(' + hue + ', 61%, 33%)');
+        gradient2.addColorStop(0.25, 'hsl(' + hue + ', 64%, 6%)');
+        gradient2.addColorStop(1, 'transparent');
+
+        ctx2.fillStyle = gradient2;
+        ctx2.beginPath();
+        ctx2.arc(half, half, half, 0, Math.PI * 2);
+        ctx2.fill();
+
+        // End cache
+        function random(min, max) {
+            if (arguments.length < 2) {
+                max = min;
+                min = 0;
+            }
+            if (min > max) {
+                var hold = max;
+                max = min;
+                min = hold;
+            }
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function maxOrbit(x, y) {
+            var max = Math.max(x, y),
+                    diameter = Math.round(Math.sqrt(max * max + max * max));
+            return diameter / movrange;
+        }
+
+        var Star = function() {
+            this.orbitRadius = random(maxOrbit(w, h));
+            this.radius = random(starsradius, this.orbitRadius) / 8;
+
+            this.orbitX = w / 2;
+            this.orbitY = h / 2;
+            this.timePassed = random(0, maxStars);
+            this.speed = random(this.orbitRadius) / speed;
+
+            this.alpha = random(2, 10) / 10;
+
+            count++;
+            stars[count] = this;
+        }
+
+        Star.prototype.draw = function() {
+            var x = Math.sin(this.timePassed) * this.orbitRadius + this.orbitX,
+                    y = Math.cos(this.timePassed) * this.orbitRadius + this.orbitY,
+                    twinkle = random(10);
+            if (twinkle === 1 && this.alpha > 0) {
+                this.alpha -= 0.05;
+            } else if (twinkle === 2 && this.alpha < 1) {
+                this.alpha += 0.05;
+            }
+
+            ctx.globalAlpha = this.alpha;
+            ctx.drawImage(canvas2, x - this.radius / 2, y - this.radius / 2, this.radius, this.radius);
+            this.timePassed += this.speed;
+        }
+
+        for (var i = 0; i < maxStars; i++) {
+            new Star();
+        }
+
+        function animation() {
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.globalAlpha = trailing; //尾巴
+            ctx.fillStyle = 'hsla(' + hue + ', 64%, 6%, 2)';
+            ctx.fillRect(0, 0, w, h);
+            ctx.globalCompositeOperation = 'lighter';
+            for (var i = 1, l = stars.length; i < l; i++) {
+                stars[i].draw();
+            };
+
+            window.requestAnimationFrame(animation);
+        }
+        animation();
+    }
+    (function(){
+        canvas("canvas3",230,1000,60,2,50000,0.5);
+    })();
+
+</script>
+
+<!--    320 * 480    -->
+<script type="text/javascript">
+    /*   移动端适配   */
+    let vp4 = document.querySelector('meta[name="viewport"]');
+    if (vp4 == null) {
+        let meta4 = document.createElement('meta');
+        meta4.name = "viewport";
+        meta4.content = "width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0";
+        let head4 = document.getElementsByTagName('head')[0];
+        head4.appendChild(meta4);
+    }
+
+    function setAttr (name, {
+            width = '',
+            height = '',
+            top = '',
+            left = '',
+            bgc = '',
+            borr = '',
+            lnh = '',
+            pos = 'absolute',
+            color = '#fcfcfb',
+            tea = 'center'}) {
+
+        name.style.width = width + 'px';
+        name.style.height = height + 'px';
+        name.style.position = pos;
+        name.style.top = top + 'px';
+        name.style.left = left + "px";
+        name.style.color = color;
+
+        name.style.backgroundColor = bgc;
+        name.style.borderRadius = borr + 'px';
+        name.style.textAlign = tea;
+        name.style.lineHeight = lnh + 'px';
+    }
+
+    try {
+        let container4 = document.createElement( 'div' );
+        container4.id = 'container4';
+        setAttr(container4, {width: 320, height: 480, pos: 'relative'});
+        let appName4 = document.createElement( 'h2' );
+        appName4.innerText = 'Musically';
+        appName4.style.font = 'bold 50px Heiti SC';
+        appName4.style.margin = 0;
+        setAttr(appName4,{top: 120, left: 42});
+        let btn4 = document.createElement( 'div' );
+        btn4.innerText = 'Download';
+        btn4.style.font = 'bold 22px Heiti SC';
+        setAttr(btn4, {width: 166, height: 42, bgc: '#f64e56', borr: 42, lnh: 42, top: 330, left: 77});
+
+        let canvas4 = document.createElement( 'canvas' );
+        canvas4.id = 'canvas4';
+
+        container.appendChild( canvas4 );
+        container.appendChild( appName4 );
+        container.appendChild( btn4 );
+        document.getElementsByTagName( 'head' )[0].nextElementSibling.appendChild( container );
+    } catch (e) {
+       document.write( '<div id="container4" style="width: 320px; height: 480px; position: relative; color: rgb(252, 252, 251); text-align: center;"><canvas id="canvas4" width="320" height="480"></canvas><h2 style="font: bold 50px \&quot;Heiti SC\&quot;; margin: 0px; position: absolute; top: 120px; left: 42px; color: rgb(252, 252, 251); text-align: center;">Musically</h2><div style="font: bold 22px/42px \&quot;Heiti SC\&quot;; width: 166px; height: 42px; position: absolute; top: 330px; left: 77px; color: rgb(252, 252, 251); background-color: rgb(246, 78, 86); border-radius: 42px; text-align: center;">Download</div></div>' );
+    };
+
+
+    /*   背景动效   */
+    function canvas(id,starscolor,starsamount,starsradius,movrange,speed,trailing){
+        var canvas = document.getElementById(id),
+                ctx = canvas.getContext('2d'),
+                w = canvas.width = 320,
+                h = canvas.height = 480,
+
+                hue = starscolor,
+                stars = [],
+                count = 0,
+                maxStars = starsamount;
+
+        var canvas2 = document.createElement('canvas'),
+                ctx2 = canvas2.getContext('2d');
+        canvas2.width = 100;
+        canvas2.height = 100;
+        var half = canvas2.width / 2,
+                gradient2 = ctx2.createRadialGradient(half, half, 0, half, half, half);
+
+        gradient2.addColorStop(0.025, '#CCC');
+        gradient2.addColorStop(0.1, 'hsl(' + hue + ', 61%, 33%)');
+        gradient2.addColorStop(0.25, 'hsl(' + hue + ', 64%, 6%)');
+        gradient2.addColorStop(1, 'transparent');
+
+        ctx2.fillStyle = gradient2;
+        ctx2.beginPath();
+        ctx2.arc(half, half, half, 0, Math.PI * 2);
+        ctx2.fill();
+
+        // End cache
+        function random(min, max) {
+            if (arguments.length < 2) {
+                max = min;
+                min = 0;
+            }
+            if (min > max) {
+                var hold = max;
+                max = min;
+                min = hold;
+            }
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function maxOrbit(x, y) {
+            var max = Math.max(x, y),
+                    diameter = Math.round(Math.sqrt(max * max + max * max));
+            return diameter / movrange;
+        }
+
+        var Star = function() {
+            this.orbitRadius = random(maxOrbit(w, h));
+            this.radius = random(starsradius, this.orbitRadius) / 8;
+
+            this.orbitX = w / 2;
+            this.orbitY = h / 2;
+            this.timePassed = random(0, maxStars);
+            this.speed = random(this.orbitRadius) / speed;
+
+            this.alpha = random(2, 10) / 10;
+
+            count++;
+            stars[count] = this;
+        }
+
+        Star.prototype.draw = function() {
+            var x = Math.sin(this.timePassed) * this.orbitRadius + this.orbitX,
+                    y = Math.cos(this.timePassed) * this.orbitRadius + this.orbitY,
+                    twinkle = random(10);
+            if (twinkle === 1 && this.alpha > 0) {
+                this.alpha -= 0.05;
+            } else if (twinkle === 2 && this.alpha < 1) {
+                this.alpha += 0.05;
+            }
+
+            ctx.globalAlpha = this.alpha;
+            ctx.drawImage(canvas2, x - this.radius / 2, y - this.radius / 2, this.radius, this.radius);
+            this.timePassed += this.speed;
+        }
+
+        for (var i = 0; i < maxStars; i++) {
+            new Star();
+        }
+
+        function animation() {
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.globalAlpha = trailing; //尾巴
+            ctx.fillStyle = 'hsla(' + hue + ', 64%, 6%, 2)';
+            ctx.fillRect(0, 0, w, h);
+            ctx.globalCompositeOperation = 'lighter';
+            for (var i = 1, l = stars.length; i < l; i++) {
+                stars[i].draw();
+            };
+
+            window.requestAnimationFrame(animation);
+        }
+        animation();
+    }
+    (function(){
+        canvas("canvas4",230,1000,60,2,50000,0.5);
+    })();
+</script>
+
+</body>
+</html>
