@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>开辟新路径-路径的概念</title>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="600"></canvas>
+
+    <script>
+
+        /* 
+            Canvas 中绘图是有状态的, 在需要改变颜色, 绘制方法, 改变一些属性... 就需要改变绘图状态. 使用 beginPath() 方法, 开辟一个新的路径.
+        */
+
+        let canvas = document.getElementById('canvas');
+        let ctx = canvas.getContext('2d');
+
+        //  首先绘制一个描边的矩形
+        ctx.moveTo( 100, 50 );
+        ctx.lineTo( 400, 50);
+        ctx.lineTo(400, 150);
+        ctx.lineTo(100, 150);
+        ctx.closePath();
+
+        ctx.stroke();
+
+        //  绘制一个填充的矩形
+        ctx.beginPath();
+        ctx.moveTo(100, 200);
+        ctx.lineTo(400, 200);
+        ctx.lineTo(400, 400);
+        ctx.lineTo(100, 400);
+
+        ctx.fill();
+
+    </script>
+</body>
+</html>
