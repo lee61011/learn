@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>线形属性-虚线</title>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="600"></canvas>
+
+    <script>
+        let canvas = document.getElementById('canvas');
+        let ctx = canvas.getContext('2d');
+
+        /* 
+            虚线:
+                ctx.setLineDash( 数组 );
+                ctx.getLineDash();
+                ctx.lineDashOffset = 值;
+
+                数组中存储的数字就是本别表示 实线部分与空白部分的长度 [ 10 ]
+        */
+
+        //  绘制水平的虚线
+        ctx.moveTo(100, 100);
+        ctx.lineTo(400, 100);
+        
+        ctx.setLineDash( [10, 5] );
+
+        ctx.stroke()
+    </script>
+</body>
+</html>
