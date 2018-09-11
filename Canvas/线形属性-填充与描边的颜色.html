@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>线形属性-填充与描边的颜色</title>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="600"></canvas>
+
+    <script>
+
+        /*
+            如何设置描边与填充的颜色
+                ctx.strokeStyle         设置描边的颜色
+                ctx.fillStyle           设置填充的颜色
+        */
+
+        let canvas = document.getElementById('canvas');
+        let ctx = canvas.getContext('2d');
+
+        //  ctx.strokeStyle = "red";
+        /* ctx.strokeStyle = 'rgba(0, 255, 0, 0.5)'
+
+        ctx.moveTo(100, 100);
+        ctx.lineTo(100, 300);
+        
+        ctx.stroke(); */
+
+
+        for (let i = 0; i < 256; i++) {
+            ctx.beginPath();
+            
+            ctx.strokeStyle = 'rgb('+ i +', 0, 0)'
+
+            ctx.moveTo(100 + i, 100);
+            ctx.lineTo(100 + i, 300);
+
+            ctx.stroke();
+        }
+    </script>
+</body>
+</html>
