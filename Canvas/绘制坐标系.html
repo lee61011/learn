@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>绘制坐标系</title>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="600"></canvas>
+
+    <script>
+        let canvas = document.getElementById('canvas');
+        let ctx = canvas.getContext('2d');
+
+        let paddingTop, paddingLeft, paddingBottom, paddingRight;
+        paddingTop = paddingLeft = paddingBottom = paddingRight = 30;
+
+        let arrowHeight = 20;
+        let arrowWidth = 10;
+
+        let x0 = paddingLeft;
+        let y0 = canvas.height - paddingBottom;
+
+        //  首先绘制坐标轴线
+        ctx.moveTo(x0, paddingTop);
+        ctx.lineTo(x0, y0);
+        ctx.lineTo(canvas.width - paddingRight, y0);
+        
+        //  绘制箭头
+        //  绘制 x 轴箭头
+        ctx.moveTo(canvas.width - paddingRight, y0);
+        ctx.lineTo(canvas.width - paddingRight - arrowHeight, y0 - arrowWidth * .5);
+        ctx.moveTo(canvas.width - paddingRight, y0);
+        ctx.lineTo(canvas.width - paddingRight - arrowHeight, y0 + arrowWidth * .5);
+
+        ctx.moveTo(paddingLeft, paddingTop);
+        ctx.lineTo(paddingLeft - arrowWidth * .5, paddingTop + arrowHeight);
+        ctx.moveTo(paddingLeft, paddingTop);
+        ctx.lineTo(paddingLeft + arrowWidth * .5, paddingTop + arrowHeight);
+
+        ctx.stroke();
+    </script>
+</body>
+</html>
