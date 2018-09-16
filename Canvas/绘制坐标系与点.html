@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>绘制坐标系与点</title>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="600"></canvas>
+
+    <script>
+        let canvas = document.getElementById('canvas');
+        let ctx = canvas.getContext('2d');
+
+        //  将 (10,20), (15,15), (17,30), (30,10), (20,15) 这些点绘制到坐标轴内
+
+        //  一般有两种方法存储这些点
+        //      1. 使用数组, 然后每一个点又构成一个数组
+        //      2. 直接使用数组, 偶像项表示 x, 奇数项表示 y .
+        let data1 = [ [10, 20], [15, 15], [17, 30], [30, 10], [20, 15] ];
+        //  let data2 = [ 10, 20, 15, 15, 17, 30, 30, 10, 20, 15 ];
+
+        //  绘制坐标系
+        let padding = 30;
+        let x0 = padding;
+        let y0 = canvas.height - padding;
+
+        let arrowHeight = 20;
+        let arrowWidth = 10;
+
+        let maxX = canvas.width - padding * 2 - arrowHeight;
+        let maxY = canvas.height - padding * 2 - arrowHeight;
+
+        //  绘制直线
+        ctx.moveTo(x0, y0);
+        ctx.lineTo(x0 + maxX + arrowHeight, y0)
+        ctx.moveTo(x0, y0);
+        ctx.lineTo(x0, y0 - maxY - arrowHeight);
+
+        ctx.stroke();
+
+        //  绘制箭头
+        ctx.beginPath();
+        //  绘制 x 轴
+        ctx.moveTo(x0 + maxX + arrowHeight, y0);
+        ctx.lineTo(x0 + maxX, y0 - arrowWidth * .5);
+        ctx.lineTo(x0 + maxX + arrowHeight * .5, y0);
+        ctx.lineTo(x0 + maxX, y0 + arrowWidth * .5);
+        ctx.closePath();
+        //  绘制 y 轴
+        ctx.moveTo(x0, padding);
+        ctx.lineTo(x0 - arrowWidth * .5, padding + arrowHeight);
+        ctx.lineTo(x0, padding + arrowHeight * .5);
+        ctx.lineTo(x0 + arrowWidth * .5, padding + arrowHeight);
+        ctx.closePath();
+
+        ctx.fill();
+
+        //  绘制点
+        //  绘制 data1 中的点
+        //  使用循环绘制点
+        ctx.beginPath();
+        ctx.fillStyle = "red";
+        for (let i = 0; i < data1.length; i++) {
+            //  每一个点都是边长为 8 的正方形
+            var tmpX = data1[i][0];
+            var tmpY = data1[i][1];
+
+            tmpX = tmpX + x0;
+            tmpY = y0 - tmpY;
+
+            ctx.moveTo(tmpX - 4, tmpY - 4);
+            ctx.lineTo(tmpX + 4, tmpY - 4);
+            ctx.lineTo(tmpX + 4, tmpY + 4);
+            ctx.lineTo(tmpX - 4, tmpY + 4);
+            ctx.closePath();
+        }
+        ctx.fill();
+
+    </script>
+
+</body>
+</html>
