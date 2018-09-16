@@ -119,9 +119,12 @@
         //  连线
         ctx.beginPath()
         ctx.strokeStyle = 'red';
-        data3.forEach( function (v) {
-            ctx[['moveTo', 'lineTo'][i == 0 ? 0 : 1]](v[0], v[1]);
-        } )
+        /* data3.forEach( function (v) {
+            ctx[['moveTo', 'lineTo'][i==0?0:1]](v[0], v[1]);
+        } ) */
+        for (let i = 0; i < data3.length; i++) {
+            ctx[['moveTo','lineTo'][i==0?0:1]](data3[i][0], data3[i][1]);
+        }
         ctx.stroke();
     </script>
 
