@@ -60,6 +60,20 @@
         //  绘制点
         //  绘制 data1 中的点
         let data1 = [[10, 20], [15, 15], [17, 30], [30, 10], [20, 15]];
+        //  排序
+        for(let i = 0; i < data1.length - 1; i++) {
+            for(let j = 0; j < data1.length - 1 - i; j++) {
+                if(data1[j][0] > data1[j + 1][0]) {
+                    let t = data1[j][0];
+                    data1[j][0] = data1[j + 1][0];
+                    data1[j + 1][0] = t;
+                }
+            }
+        }
+        
+        
+        let data3 = [];     //  用于存储计算后的坐标
+
         //  需要计算出最大值和比例
         let dataMaxX = Math.max.apply(null, data1.map(function (v) {
             return v[0];
@@ -90,14 +104,25 @@
             tmpX = tmpX + x0;
             tmpY = y0 - tmpY;
 
+            //  ctx[['moveTo','lineTo'][i==0?0:1]](tmpX, tmpY);
+            data3.push([tmpX, tmpY]);
+
             ctx.moveTo(tmpX - 4, tmpY - 4);
             ctx.lineTo(tmpX + 4, tmpY - 4);
             ctx.lineTo(tmpX + 4, tmpY + 4);
             ctx.lineTo(tmpX - 4, tmpY + 4);
             ctx.closePath();
         }
+        //  ctx.stroke();
         ctx.fill();
 
+        //  连线
+        ctx.beginPath()
+        ctx.strokeStyle = 'red';
+        data3.forEach( function (v) {
+            ctx[['moveTo', 'lineTo'][i == 0 ? 0 : 1]](v[0], v[1]);
+        } )
+        ctx.stroke();
     </script>
 
 </body>
