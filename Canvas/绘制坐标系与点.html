@@ -18,7 +18,7 @@
         //  一般有两种方法存储这些点
         //      1. 使用数组, 然后每一个点又构成一个数组
         //      2. 直接使用数组, 偶像项表示 x, 奇数项表示 y .
-        let data1 = [ [10, 20], [15, 15], [17, 30], [30, 10], [20, 15] ];
+        //  let data1 = [ [10, 20], [15, 15], [17, 30], [30, 10], [20, 15] ];
         //  let data2 = [ 10, 20, 15, 15, 17, 30, 30, 10, 20, 15 ];
 
         //  绘制坐标系
@@ -59,6 +59,18 @@
 
         //  绘制点
         //  绘制 data1 中的点
+        let data1 = [[10, 20], [15, 15], [17, 30], [30, 10], [20, 15]];
+        //  需要计算出最大值和比例
+        let dataMaxX = Math.max.apply(null, data1.map(function (v) {
+            return v[0];
+        }));
+        let dataMaxY = data1[0][1];
+        for (let i = 0; i < data1.length; i++) {
+            if ( dataMaxY < data1[i][1] ) {
+                dataMaxY = data1[i][1];
+            }
+        }
+
         //  使用循环绘制点
         ctx.beginPath();
         ctx.fillStyle = "red";
@@ -66,7 +78,15 @@
             //  每一个点都是边长为 8 的正方形
             var tmpX = data1[i][0];
             var tmpY = data1[i][1];
+            //  此时得到的是数据中的参考坐标
 
+            //  实际在 canvas 中的坐标应该比上 maxXY = 数据中的坐标 比上 dataMaxXY
+
+            //  转换成 canvas 中的坐标
+            tmpX = tmpX * maxX / dataMaxX;
+            tmpY = tmpY * maxY / dataMaxY;
+
+            //  将坐标原点从左上角转换到坐标轴的原点
             tmpX = tmpX + x0;
             tmpY = y0 - tmpY;
 
