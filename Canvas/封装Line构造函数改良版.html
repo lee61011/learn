@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>封装Line构造函数</title>
+</head>
+
+<body>
+
+    <canvas id="canvas" width="800" height="600"></canvas>
+
+    <script>
+
+        let canvas = document.getElementById('canvas');
+        let ctx = canvas.getContext('2d');
+
+        function Line( config ) {
+            //  必须要提供的
+            this.ctx = config.ctx;
+            this.x0 = config.x0;
+            this.y0 = config.y0;
+            this.x1 = config.x1;
+            this.y1 = config.y1;
+            //  可选提供的
+            this.strokeStyle = config.strokeStyle;
+            this.lineWidth = config.lineWidth;
+        }
+        Line.prototype = {
+            constructer: Line,
+            stroke: function () {
+                //  封装绘制过程
+                this.ctx.moveTo(this.x0, this.y0);
+                this, ctx.lineTo(this.x1, this.y1);
+
+                if ( this.strokeStyle ){
+                    this.ctx.strokeStyle = this.strokeStyle;
+                }
+                if ( this.lineWidth ) {
+                    this.ctx.lineWidth = this.lineWidth;
+                }
+
+                this.ctx.stroke();
+            }
+        }
+
+        //  let line = new Line(ctx, 100, 100, 400, 100);
+
+        let line = new Line({
+            //  如果将参数传递方式修改为数组方式会方便  例如: points = [ 100, 100, 400, 100 ]; 需要修改构造函数
+            ctx: ctx,
+            x0: 100,
+            y0: 100,
+            x1: 400,
+            y1: 100,
+            strokeStyle: 'red',
+            lineWidth: 5
+        });
+
+        line.stroke();
+    </script>
+
+</body>
+
+</html>
