@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>简单的移动动画</title>
+</head>
+<body>
+    
+    <canvas id="canvas" width="800" height="600"></canvas>
+
+    <script>
+        let canvas = document.getElementById('canvas');
+        let ctx = canvas.getContext('2d');
+
+        //  从 100,100 移动到 400,100
+        let x = 100,
+            y = 100,
+            w = 100,
+            h = 100;
+        let step = 3;    
+
+        //  ctx.fillRect( x, y, w, h );
+        //  ctx.clearRect( x, y, w, h );
+        let intervalId = setInterval(function () {
+            ctx.clearRect(x, y, w, h);
+            //  x++;
+            x += step;
+            if ( x >= 400 ) {
+                x = 400;
+                clearInterval( intervalId );
+            }
+            ctx.fillRect(x, y, w, h);
+        }, 20);
+
+    </script>
+
+</body>
+</html>
