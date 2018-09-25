@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>弧度与角度</title>
+</head>
+
+<body>
+
+    <canvas id="canvas" width="800" height="600"></canvas>
+
+    <script>
+        function toAngle(radian) {
+            return radian * 180 / Math.PI;
+        }
+        function toRadian(angle) {
+            return angle * Math.PI / 180;
+        }
+
+        let canvas = document.getElementById("canvas");
+        let ctx = canvas.getContext('2d');
+
+        //  绘制圆心在 canvas正中心, 半径为 100, 角度从 -60度 到 120 度的圆弧
+        let x = canvas.width / 2;
+        let y = canvas.height / 2;
+        let r = 100;
+        let start = -60;
+        let end = 120;
+
+        ctx.arc(x, y, r, toRadian(start), toRadian(end));
+        ctx.stroke();
+
+
+        //  如果没有当前位置, 绘制圆弧是没有任何问题的
+        //  但是如果有了当前位置, 绘制圆弧的时候会将当亲位置连接到圆弧上
+
+
+
+        //  方法1: 使用开启新路径
+        /* ctx.beginPath();
+        ctx.arc(x + 100, y, r, toRadian(start), toRadian(end));
+        ctx.stroke(); */
+
+        //  方法2: 将起点设置在圆弧上
+        //  将起始点设置到圆弧上
+        ctx.moveTo( x + 100 + r * Math.cos( toRadian(start) ),
+                    y + r * Math.sin( toRadian(start) )); 
+        ctx.arc( x + 100, y, r, toRadian(start), toRadian(end));
+        ctx.stroke();
+    </script>
+
+</body>
+
+</html>
