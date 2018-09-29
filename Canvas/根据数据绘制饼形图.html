@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>绘制三等分饼形图</title>
+</head>
+
+<body>
+
+    <canvas id="canvas" width="800" height="600"></canvas>
+
+    <script>
+        function toAngle(radian) {
+            return radian * 180 / Math.PI;
+        }
+        function toRadian(angle) {
+            return angle * Math.PI / 180;
+        }
+
+        let canvas = document.getElementById("canvas");
+        let ctx = canvas.getContext('2d');
+
+        let x0 = canvas.width / 2,
+            y0 = canvas.height / 2;
+
+        let data = [ 11, 22, 33, 112, 34, 56 ];
+
+        //  首先求和, 计算出每一个数字占总数的百分比, 然后与 360 相乘, 得到角度
+        let sum = 0;
+        data.forEach( function (v) {
+           sum += v; 
+        });
+        //  根据总和计算出每一个百分比与角度
+        //  { value: 11, angle: 角度 }
+        let data2 = data.map( function (v) {
+            return { value: v, angle: v * 360 / sum };
+        });
+
+        //  遍历 data2 来进行绘图
+        let colors = 'darkslategrey,darkturquoise,darkviolet,deeppinkmdeepskyblue,dimgray,dimgrey,dodgerblue,firebrick'.split(',');
+
+        let start = -90;
+        data2.forEach( function (v, i) {
+           ctx.beginPath();
+           ctx.fillStyle = colors[i];
+           ctx.moveTo( x0, y0 );
+           ctx.arc( x0, y0, 100, toRadian(start), toRadian(start+=v.angle) )
+           ctx.fill();
+        });
+
+        //  绘制一个小圆环
+        ctx.beginPath();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = 'pink';
+        ctx.arc( x0, y0, 105, 0, Math.PI * 2 );
+        ctx.stroke();
+    </script>
+
+</body>
+
+</html>
