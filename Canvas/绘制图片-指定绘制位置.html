@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>绘制图片</title>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="600"></canvas>
+
+    <script>
+        let canvas = document.getElementById('canvas')
+        let ctx = canvas.getContext('2d');
+
+        //  绘制图片    ctx.drawImage()
+
+
+
+        //  1. 创建图片对象, 其实就是 img 标签
+        //      document.createElement('img')
+        //      简化的写法: new Image();
+        let img = new Image();
+        img.src = 'http://img.zcool.cn/community/0117e2571b8b246ac72538120dd8a4.jpg@1280w_1l_2o_100sh.jpg'
+        //  document.body.appendChild( img );
+
+        //  2. 确定要绘制到哪一个位置
+        let x = 100, y = 100;
+
+        //  3. 开始绘制 ( 需要等待, 等到图片加载完毕后再执行 )
+        //  ctx.drawImage( img, x, y );
+        img.onload = function () {
+            ctx.drawImage( img, x, y );
+        }
+
+    </script>
+</body>
+</html>
