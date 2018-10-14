@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>绘制图片-指定绘制区域</title>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="600"></canvas>
+
+    <script>
+        let canvas = document.getElementById('canvas');
+        let ctx = canvas.getContext("2d");
+
+        //  1. 准备 image 对象
+        let img = new Image();
+        img.src = 'http://imgsrc.baidu.com/imgad/pic/item/4afbfbedab64034f788a1cd2a5c379310b551d9a.jpg';
+
+        //  2. 准备矩形区域
+        let x = 100, y = 200,
+            width, height = 200;
+
+        //  3. 开始绘图
+        img.onload = function () {
+            
+            //  w : h = sW : sH
+            //  source  资源
+            width = img.width * height / img.height;
+            
+            ctx.drawImage( img, x, y, width, height );
+            ctx.drawImage(img, x + 10, y + 10, width, height);
+            ctx.drawImage(img, x + 20, y + 20, width, height);
+        }    
+    </script>
+</body>
+</html>
