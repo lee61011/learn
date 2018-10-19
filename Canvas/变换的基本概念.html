@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>变换的基本概念</title>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="600"></canvas>
+
+    <script>
+        let canvas = document.getElementById('canvas');
+        let ctx = canvas.getContext("2d");
+
+        //  所谓的变换就是一套数学公式,可以记录坐标轴的变化方式
+        //  利用坐标轴的变换可以绘制出, 根据不同坐标轴特点而形成的图形
+
+        //  基本的 api
+        //      ctx.translate()     平移变换
+        //      ctx.rotate()        旋转变换
+        //      ctx.scale()         伸缩变换
+
+        
+        //  1.  绘制一个圆, 在画布的左半边
+        let x1 = canvas.width / 4;
+        let y1 = canvas.height / 4;
+        let radius1 = 100;
+        ctx.strokeStyle = 'red';
+        ctx.arc( x1, y1, radius1, 0, 2 * Math.PI )
+        ctx.stroke();
+
+        //  2. 在右半边绘制一个等大的圆
+        ctx.beginPath();
+        //  将 x 圆心坐标增加 3 倍
+        /* let x2 = canvas.width * 3 / 4;
+            let y2 = canvas.height / 4;
+            let radius2 = 100;
+            ctx.strokeStyle = 'red';
+            ctx.arc(x2, y2, radius2, 0, 2 * Math.PI)
+            ctx.stroke(); */
+
+
+        //  将坐标轴向右移动半个画布
+        ctx.translate(canvas.width/2, 0)    //  将坐标轴向右平移半个画布
+        ctx.scale( 0.5, 1 )                 //  将 x 轴的长度缩小一半, y 轴不变
+
+        ctx.arc(x1, y1, radius1, 0, 2 * Math.PI)
+        ctx.stroke();
+
+
+    </script>
+</body>
+</html>
