@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>分析旋转变换效果</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="800" height="600"></canvas>
+
+    <script>
+        let canvas = document.getElementById('canvas');
+        let ctx = canvas.getContext("2d");
+
+        function toRadian(angle) {
+            return angle * Math.PI / 180;
+        }
+
+        //  所谓的变换就是一套数学公式,可以记录坐标轴的变化方式
+        //  利用坐标轴的变换可以绘制出, 根据不同坐标轴特点而形成的图形
+
+        //  基本的 api
+        //      ctx.translate()     平移变换
+        //      ctx.rotate()        旋转变换
+        //      ctx.scale()         伸缩变换
+
+
+        //  将坐标系绘制到正中央
+        ctx.translate( canvas.width/2, canvas.height/2 ); 
+
+        //  在正常情况下绘制坐标结构
+        ctx.setLineDash( [5] );
+        ctx.moveTo( 0, 0 );
+        ctx.lineTo( canvas.width, 0 );
+        ctx.moveTo( 0, 0 );
+        ctx.lineTo( 0, canvas.height );
+        ctx.strokeStyle = 'red';
+
+        ctx.stroke();
+
+        //  绘制矩形
+        ctx.strokeRect( -50, -50, 100, 100 );
+
+
+        //  将坐标轴旋转 30 度
+        ctx.rotate( toRadian(30) );
+        //  在正常情况下绘制坐标结构
+            ctx.setLineDash([]);
+            ctx.moveTo(0, 0);
+            ctx.lineTo(canvas.width, 0);
+            ctx.moveTo(0, 0);
+            ctx.lineTo(0, canvas.height);
+            ctx.strokeStyle = 'red';
+
+            ctx.stroke();
+
+            //  绘制矩形
+            ctx.strokeRect(-50, -50, 100, 100);
+
+
+    </script>
+</body>
+
+</html>
