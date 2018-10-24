@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>双向数据绑定</title>
+</head>
+<body>
+    
+    <div id="app">
+        <!-- 
+            在使用 v-module 时, 如果是用中文输入法输入中文,一般在没有选中词组前, Vue 是怒吼更新数据的, 当敲下汉子时采购触发更新, 
+            如果希望总是实时更新, 可以使用 @input 来代替 v-module
+         -->
+         <input type="text" @input="handleInput" placeholder="请输入……">
+         <p style="margin-top: 100px">输入的内容是: {{ message }}</p>
+
+         <br>
+         <p>*****************************************************************</p>
+         <br>
+
+         <input type="radio" :checked="picked">
+         <label>单选按钮</label>
+
+        <br>
+        <p>*****************************************************************</p>
+        <br>
+
+        <input type="radio" v-model="picked1" value="html" id="html">
+        <label for="html">HTML</label>
+        <br>
+        <input type="radio" v-model="picked1" value="js" id="js">
+        <label for="js">JavaScript</label>
+        <br>
+        <input type="radio" v-model="picked1" value="css" id="css">
+        <label for="css">CSS</label>
+        <br>
+        <p>选择的项是: {{ picked1 }}</p>
+
+        <br>
+        <p>*****************************************************************</p>
+        <br>
+
+        <input type="checkbox" v-model="checked" id="checked">
+        <label for="checked">选择状态: {{ checked }}</label>
+
+        <br>
+        <p>*****************************************************************</p>
+        <br>
+
+        <input type="checkbox" v-model="checked1" value="html" id="html">
+        <label for="html">HTML</label>
+        <br>
+        <input type="checkbox" v-model="checked1" value="js" id="js">
+        <label for="js">JavaScript</label>
+        <br>
+        <input type="checkbox" v-model="checked1" value="css" id="css">
+        <label for="css">css</label>
+        <br>
+        <p>选择的项是: {{ checked1 }}</p>
+
+    </div>
+
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: '',
+                picked: true,
+                picked1: 'js',
+                checked: false,
+                checked1: ['html','css'],
+            },
+            methods: {
+                handleInput: function (e) {
+                    this.message = e.target.value;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
