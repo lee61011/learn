@@ -18,7 +18,7 @@ var Time = {
     getTodayUnix: function () {
         var date = new Date();
         date.setHours(0);
-        date.serMinutes(0);
+        date.setMinutes(0);
         date.setSeconds(0);
         date.setMilliseconds(0);
         return date.getTime();
@@ -30,14 +30,14 @@ var Time = {
         date.setMonth(0);
         date.setDate(1);
         date.setHours(0);
-        date.serMinutes(0)
-        date,setSeconds(0);
+        date.setMinutes(0)
+        date.setSeconds(0);
         date.setMilliseconds(0);
         return date.getTime();
     },
 
     //  获取标准年月日
-    getLastData: function () {
+    getLastDate: function (time) {
         var date = new Date(time)  ;
         var month = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1;
         var day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
@@ -45,7 +45,7 @@ var Time = {
     },
 
     //  转换时间
-    getFormatTime: function () {
+    getFormatTime: function (timestamp) {
         var now = this.getUnix();                       //  当前时间戳
         var today = this.getTodayUnix();                //  今天 0 点时间戳
         var year = this.getYearUnix();                  //  今年 0 点时间戳
@@ -63,8 +63,22 @@ var Time = {
         } else if ( timer/86400 <= 31 ) {
             tip = Math.ceil(timer/86400) + "天前";
         } else {
-            tip = this.getLastDate(timesatmp);
+            tip = this.getLastDate(timestamp);
         }
         return tip;
     }
 }
+
+Vue.directive('time', {
+    bind: function (el, binding) {
+        el.innerHTML = Time.getFormatTime(binding.value);
+        //  每分钟触发一次, 更新时间
+        el.__timeout__ = setInterval (function () {
+            el.innerHTML = Time.getFormatTime(binding.value);
+        }, 60000);
+    },
+    unbind: function (el) {
+        clearInterval (el.__timeout__);
+        delete el.__timeout__;
+    }
+})
