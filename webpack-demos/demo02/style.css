@@ -1,0 +1,6 @@
+/* 页面样式, 在 main.js 中通过 import 导入 */
+
+#app {
+    font-size: 24px;
+    color: #f50;
+}
