@@ -24,6 +24,7 @@ var config = {
                 ] */
 
                 /* 使用插件打包改变生成样式文件位置 */
+                //  这里要安装 extract-text-webpack-plugin@next 版本, 直接安装的版本不支持 webpack4.0.0 之后的版本
                 use: ExtractTextPlugin.extract({
                     use: 'css-loader',
                     fallback: 'style-loader'

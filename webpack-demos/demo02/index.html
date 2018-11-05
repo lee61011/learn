@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>逐步完善配置文件</title>
-    <link rel="stylesheet" href="/dist/main.css">
+    <link rel="stylesheet" type="text/css" href="/dist/main.css">
 </head>
 <body>
 
-    <!-- 这里使用 extract-text-webpack-plugin 插件吧散落在各地的 css 提取出来, 生成一个 main.css 文件 -->
-    <!--  -->
+    <!-- 这里的 css 是通过 JavaScript 动态创建 <style> 标签来写入的, 这意味着样式代码都已将编译在了 main.js 文件里, 但在实际业务中, 因为项目大了样式会很多, 都放在 js 里太占体积, 还不能缓存, 这里可以使用插件来处理 -->
+    <!-- 这里使用 extract-text-webpack-plugin 插件吧散落在各地的 css 提取出来, 生成一个 main.css 文件,  注意 webpack.config.js 中的配置 -->
 
     <div id="app">
         Hello Webpack
