@@ -1,5 +1,8 @@
-var path = require('path');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+/* var ExtractTextPlugin = require('extract-text-webpack-plugin'); */
+/* var VueLoaderPlugin = require('vue-loader/lib/plugin'); */
+
 
 var config = {
     entry: {
@@ -10,6 +13,9 @@ var config = {
         publicPath: '/dist/',
         filename: 'main.js'
     },
+
+    mode: 'development',
+
     module: {
         rules: [
             {
@@ -17,10 +23,20 @@ var config = {
                 loader: 'vue-loader',
                 options: {
                     loaders: {
-                        css: ExtractTextPlugin.extract({
+                        /* css: ExtractTextPlugin.extract({
                             use: 'css-loader',
                             fallback: 'vue-style-loader'
-                        })
+                        }) */
+                        css: [
+                            {
+                                loader: MiniCssExtractPlugin.loader,
+                                options: {
+                                    publicPath: '/dist/',
+                                    filename: 'main.css'
+                                }
+                            },
+                            "css-loader"
+                        ]
                     }
                 }
             },
@@ -31,15 +47,27 @@ var config = {
             },
             {
                 test: /\.css$/,
-                use: ExtractTextPlugin.extract({
+                /* use: ExtractTextPlugin.extract({
                     use: 'css-loader',
                     fallback: 'style-loader'
-                })
+                }) */
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            publicPath: '/dist/',
+                            filename: 'main.css'
+                        }
+                    },
+                    "css-loader"
+                ]
             }
         ]
     },
     plugins: [
-        new ExtractTextPlugin("main.css")
+        /* new ExtractTextPlugin("main.css"), */
+        /* new VueLoaderPlugin() */
+        new MiniCssExtractPlugin()
     ]
 }
 

@@ -6,5 +6,5 @@ import App from './app.vue';
 //  创建 Vue 根实例
 new Vue({
     el: '#app',
-    render: h => h(App)
+    render: h=>h(App)
 });
