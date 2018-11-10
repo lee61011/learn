@@ -1,7 +1,6 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-/* var ExtractTextPlugin = require('extract-text-webpack-plugin'); */
-var VueLoaderPlugin = require('vue-loader/lib/plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 
 var config = {
@@ -23,10 +22,6 @@ var config = {
                 loader: 'vue-loader',
                 options: {
                     loaders: {
-                        /* css: ExtractTextPlugin.extract({
-                            use: 'css-loader',
-                            fallback: 'vue-style-loader'
-                        }) */
                         css: [
                             {
                                 loader: MiniCssExtractPlugin.loader,
@@ -47,10 +42,6 @@ var config = {
             },
             {
                 test: /\.css$/,
-                /* use: ExtractTextPlugin.extract({
-                    use: 'css-loader',
-                    fallback: 'style-loader'
-                }) */
                 use: [
                     {
                         loader: MiniCssExtractPlugin.loader,
@@ -61,11 +52,14 @@ var config = {
                     },
                     "css-loader"
                 ]
+            },
+            {
+                test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
+                loader: 'url-loader?limit=1024'
             }
         ]
     },
     plugins: [
-        /* new ExtractTextPlugin("main.css"), */
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin()
     ]
