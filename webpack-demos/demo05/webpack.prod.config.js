@@ -2,7 +2,6 @@
 
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-/* const ExtractTextPlugin = require('extract-text-webpack-plugin'); */
 const MinicssExtractPlugin = require('mini-css-extract-plugin');
 const merge = require('webpack-merge');
 const webpackBaseConfig = require('./webpack.config.js');
@@ -46,7 +45,12 @@ module.exports = merge(webpackBaseConfig, {
             inject: false
         })
     ],
-    optimization: {
-        minimize: false
-    }
+    
+    optimization: {}
 })
+
+
+
+/* 
+    参考文章:   https://blog.csdn.net/harsima/article/details/80819747
+*/

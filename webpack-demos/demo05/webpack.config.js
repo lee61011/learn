@@ -30,6 +30,7 @@ var config = {
                                     filename: 'main.css'
                                 }
                             },
+                            "style-loader",
                             "css-loader"
                         ]
                     }
@@ -60,8 +61,8 @@ var config = {
         ]
     },
     plugins: [
-        new VueLoaderPlugin(),
-        new MiniCssExtractPlugin()
+        new MiniCssExtractPlugin(),
+        new VueLoaderPlugin()
     ]
 }
 

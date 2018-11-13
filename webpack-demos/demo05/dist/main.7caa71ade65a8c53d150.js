@@ -289,7 +289,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n//\n//\n//\n//\n//\n//\n\n/* 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("throw new Error(\"Module parse failed: Unexpected token (18:3)\\nYou may need an appropriate loader to handle this file type.\\n| \\n| \\n> h1 a {\\n|     color: #3399ff;\\n|     font-size: 24px;\");\n\n//# sourceURL=webpack:///./title.vue?");
+eval("throw new Error(\"Module parse failed: Unexpected token (18:3)\\nYou may need an appropriate loader to handle this file type.\\n| \\n| \\n> h1 a{\\n|     color: #3399ff;\\n|     font-size: 24px;\");\n\n//# sourceURL=webpack:///./title.vue?");
 
 /***/ }),
 

@@ -15,7 +15,7 @@
 </script>
 
 <style scoped>
-    h1 a {
+    h1 a{
         color: #3399ff;
         font-size: 24px;
     }
