@@ -1,11 +1,13 @@
 //  导入 Vue 框架
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import Vuex from 'vuex';
 //  导入 app.vue 组件
 import App from './app.vue';
 
 
 Vue.use(VueRouter);
+Vue.use(Vuex)
 
 const Routers = [
     {
@@ -96,10 +98,16 @@ router.beforeEach((to, from, next) => {
 }); */
 
 
+const store = new Vuexx.store({
+    //  Vuex 的配置
+});
+
 //  创建 Vue 根实例
 new Vue({
     el: '#app',
     router: router,
+    //  使用 vuex
+    store: store,
     render: h => {
         return h(App)
     }
