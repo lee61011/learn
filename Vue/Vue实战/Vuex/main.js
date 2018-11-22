@@ -98,8 +98,39 @@ router.beforeEach((to, from, next) => {
 }); */
 
 
-const store = new Vuexx.store({
+const store = new Vuex.Store({
     //  Vuex 的配置
+    //  数据保存在 Vuex 选项的 state 字段内, 在任何组件内, 可以直接通过 $store.state.count 读取
+    state: {
+        count: 0
+    },
+    //  改变 store 中数据的唯一途径就是显示地提交 mutations
+    mutations: {
+
+        //  提交 mutation 方法一:
+
+        //  在组件内 通过 this.$store.commit 方法来执行 mutations
+        increment (state) {
+            state.count++;
+        },
+        decrease (state) {
+            state.count--;
+        },
+
+        //  mutations 还可以接受第二个参数, 可以是数字、字符串或对象等类型. 比如每次增加的不是 1, 而是指定的数量, 可以这样改写
+        /* increment (state, n=10) {
+            state.count += n;
+        } */
+
+
+
+
+        //  提交 mutation 方法二:
+        /* increment (state, params) {
+            state.count += params.count;
+        } */
+
+    }
 });
 
 //  创建 Vue 根实例
