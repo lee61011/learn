@@ -10,6 +10,8 @@
         <button @click="handleDecrease">-1</button>
         <br>
         <router-link to="/about">跳转到about</router-link>
+
+        <div>{{ list }}</div>
     </div>
 </template>
 
@@ -26,8 +28,13 @@
 
        //   通过计算属性获取 Vuex 中保存的数据
        computed: {
-           count () {
+           /* count () {
                return this.$store.state.count;
+           } */
+
+
+           list () {
+               return this.$store.state.list.filter(item => item < 10);
            }
        },
 

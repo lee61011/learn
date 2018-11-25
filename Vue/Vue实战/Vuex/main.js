@@ -102,7 +102,10 @@ const store = new Vuex.Store({
     //  Vuex 的配置
     //  数据保存在 Vuex 选项的 state 字段内, 在任何组件内, 可以直接通过 $store.state.count 读取
     state: {
-        count: 0
+        //  count: 0
+
+        //  高级用法
+        list: [1,5,8,10,30,50]
     },
     //  改变 store 中数据的唯一途径就是显示地提交 mutations
     mutations: {
