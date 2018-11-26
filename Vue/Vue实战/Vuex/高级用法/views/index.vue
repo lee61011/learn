@@ -1,17 +1,6 @@
 <template>
     <div>
-        <h1>首页</h1>
-        <!-- 
-            直接将 Vuex 中保存的数据通过 $store.state.name 写在 template 里显得有点乱, 可以使用一个计算属性来显示
-            {{ $store.state.count }} 
-        -->
-        {{ count }}
-        <button @click="handleIncrement">+1</button>
-        <button @click="handleDecrease">-1</button>
-        <br>
-        <router-link to="/about">跳转到about</router-link>
-
-        <div>{{ list }}</div>
+       <div>{{ list }}</div>
     </div>
 </template>
 
@@ -28,8 +17,8 @@
 
        //   通过计算属性获取 Vuex 中保存的数据
        computed: {
-           count () {
-               return this.$store.state.count;
+           list () {
+               return this.$store.state.list.filter(item => item < 10);
            }
        },
 
