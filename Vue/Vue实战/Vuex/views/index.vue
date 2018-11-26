@@ -28,13 +28,8 @@
 
        //   通过计算属性获取 Vuex 中保存的数据
        computed: {
-           /* count () {
+           count () {
                return this.$store.state.count;
-           } */
-
-
-           list () {
-               return this.$store.state.list.filter(item => item < 10);
            }
        },
 
