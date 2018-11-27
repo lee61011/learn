@@ -104,7 +104,8 @@ const store = new Vuex.Store({
     state: {
         //  使用 Vuex  定义一个数据 list, 如果只想得到小于 10 的数据, 可以在组件的计算属性里进行过滤
         //  在 index.vue 文件中进行修改
-        list: [1, 5, 8, 10, 30, 50]
+        list: [1, 5, 8, 10, 30, 50],
+        count: 0
     },
     getters: {
         filteredList: state => {
@@ -115,7 +116,34 @@ const store = new Vuex.Store({
         listCount: (state, getters) => {
             return getters.filteredList.length;
         }
-    }
+    },
+
+    /* 
+        mutation 里不应该异步操作数据, 所以有了 actions 选项
+        action 与 mutation 很像, 不同的是 action 里面提交的是 mutation, 并且可以异步操作业务逻辑
+
+        action 在组件内通过 $store.dispatch 触发, 例如使用 action 来加 1.
+    */
+   mutations: {
+        increment (state, n = 1) {
+            state.count += n;
+        }
+   },
+   actions: {
+       /* increment (context) {
+           context.commit('increment');
+       } */
+
+       //   使用异步方法在 1s 后提交 mutation
+       asyncIncrement (context) {
+           return new Promise(resolve => {
+               setTimeout(() => {
+                   context.commit('increment');
+                   resolve();
+               }, 1000);
+           })
+       }
+   }
 });
 
 //  创建 Vue 根实例

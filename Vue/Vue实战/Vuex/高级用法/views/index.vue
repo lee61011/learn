@@ -3,6 +3,13 @@
        <div>{{ list }}</div>
 
         <div>{{ listCount }}</div>
+
+        <p>**********************************************************</p>
+
+        {{ count }}
+        <!-- <button @click="handleActionIncrement">action +1</button> -->
+        <button @click="handleAsyncIncrement">async +1</button>
+
     </div>
 </template>
 
@@ -26,6 +33,10 @@
            },
            listCount () {
                return this.$store.getters.listCount;
+           },
+
+           count () {
+               return this.$store.state.count;
            }
        },
 
@@ -46,6 +57,16 @@
                    count: 8
                })
            } */
+
+
+           /* handleActionIncrement () {
+               this.$store.dispatch('increment');
+           } */
+           handleAsyncIncrement () {
+               this.$store.dispatch('asyncIncrement').then( () => {
+                   console.log(this.$store.state.count);        //  1
+               });
+           }
        }
 
     }
