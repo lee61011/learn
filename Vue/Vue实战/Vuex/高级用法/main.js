@@ -106,6 +106,16 @@ const store = new Vuex.Store({
         //  在 index.vue 文件中进行修改
         list: [1, 5, 8, 10, 30, 50]
     },
+    getters: {
+        filteredList: state => {
+            return state.list.filter(item => item < 10)
+        },
+        //  getter 也可以依赖其他的 getter, 把 getter 作为第二个参数.
+        //  比如再写一个 getter, 计算出 list 过滤后的就果的数量
+        listCount: (state, getters) => {
+            return getters.filteredList.length;
+        }
+    }
 });
 
 //  创建 Vue 根实例

@@ -1,6 +1,8 @@
 <template>
     <div>
        <div>{{ list }}</div>
+
+        <div>{{ listCount }}</div>
     </div>
 </template>
 
@@ -18,7 +20,12 @@
        //   通过计算属性获取 Vuex 中保存的数据
        computed: {
            list () {
-               return this.$store.state.list.filter(item => item < 10);
+               //   return this.$store.state.list.filter(item => item < 10);
+
+               return this.$store.getters.filteredList;
+           },
+           listCount () {
+               return this.$store.getters.listCount;
            }
        },
 
