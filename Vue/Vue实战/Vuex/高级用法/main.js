@@ -146,6 +146,48 @@ const store = new Vuex.Store({
    }
 });
 
+
+/* 
+    最后一个选项是 modules, 它用来将 store 分割到不同模块. 当项目足够大时, store 里的 state、getters、mutations、actions 会非常多, 都放在 main.js 中显得不是很友好, 使用 modules 可以把他们写到不同的文件中. 
+    每个 module 拥有自己的 state、getters、mutations、actions, 而且可以多层嵌套
+*/
+/* 
+const moduleA = {
+    state: {},
+    mutations: {},
+    actions: {},
+    getters: {}
+}
+const moduleB = {
+    state: {},
+    mutations: {},
+    cations: {}
+}
+
+const store = new Vuex.Store({
+    modules: {
+        a: moduleA,
+        b: moduleB
+    }
+})
+store.state.a       //  moduleA 的状态
+store.state.b       //  moduleB 的状态
+ */
+
+ // module 的 mutation 和 getter 接受的第一个参数 state 是当前模块的状态. 在 actions 和 getters 中, 还可以接受一个参数 rootState, 来访问根节点的状态.
+ //     比如: getters 中 rootState 将作为第 3 个参数:
+const moduleA = {
+    state: {
+        count: 0
+    },
+    getters: {
+        sumCount (state, getters, rootState) {
+            return state.count + rootState.count;
+        }
+    }
+}
+
+
 //  创建 Vue 根实例
 new Vue({
     el: '#app',
