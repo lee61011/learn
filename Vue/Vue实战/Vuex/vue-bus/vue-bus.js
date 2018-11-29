@@ -23,3 +23,8 @@ const install = function (Vue) {
     Vue.prototype.$bus = Bus;
 };
 export default install;
+
+/* 
+    vue-bus 的代码比较简单, 只有不到 20 行, 但它却解决了跨组件通信的问题, 
+    而且通过插件的形式使用后, 所有组件都可以直接使用 $bus, 而无需每个组件都导入 bus 组件
+*/

@@ -1,7 +1,7 @@
 <template>
     <div>
-        <v-title title="Vue组件化"></v-title>
-        <v-button @click="handleClick">点击按钮</v-button>
+        <!-- <v-title title="Vue组件化"></v-title>
+        <v-button @click="handleClick">点击按钮</v-button> -->
 
         <p>
             <img src="./images/image.png" style="width: 200px">
@@ -13,13 +13,13 @@
 
 <script>
     //  导入组件
-    import vTitle from './title.vue';
-    import vButton from './button.vue';
+   /*  import vTitle from './title.vue';
+    import vButton from './button.vue'; */
 
     export default {
         components: {
-            vTitle,
-            vButton
+            /* vTitle,
+            vButton */
         },
         methods: {
             handleClick (e) {
