@@ -1,0 +1,50 @@
+// less 中的注释
+/*这种注释会被编译到.css文件中*/
+// 这种注释不会被编译
+
+
+// less 中的变量
+// less 中想声明变量的话 一定要使用@开头  例如: @变量名: 值;
+
+
+/*less 混合*/
+
+.box-border{
+  width: 100px;
+  height: 100px;
+  border: 5px solid deepskyblue;
+}
+
+.box1{
+  .box-border;
+}
+
+.box2{
+  margin-top: 20px;
+  margin-left: 120px;
+  .box-border;
+}
+
+// 混合-可带参数的
+.box-border1(@border_width){
+  width: 100px;
+  height: 100px;
+  border: @border_width solid deepskyblue;
+}
+
+.box3{
+  .box-border1(10px);                     // 这里必须要传一个值
+  background-color: #aecfff;
+}
+
+//混合-默认带值
+.box-border4(@border_width: 3px){         // 单位一定要有
+  width: 100px;
+  height: 100px;
+  border: @border_width solid deepskyblue;
+}
+.box4{
+  .box-border4();         // 如果这里不传值,默认就是3px
+  background-color: #aecfff;
+  margin-top: 20px;
+}

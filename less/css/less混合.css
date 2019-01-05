@@ -1,0 +1,33 @@
+/*这种注释会被编译到.css文件中*/
+/*less 混合*/
+.box-border {
+  width: 100px;
+  height: 100px;
+  border: 5px solid deepskyblue;
+}
+.box1 {
+  width: 100px;
+  height: 100px;
+  border: 5px solid deepskyblue;
+}
+.box2 {
+  margin-top: 20px;
+  margin-left: 120px;
+  width: 100px;
+  height: 100px;
+  border: 5px solid deepskyblue;
+}
+.box3 {
+  width: 100px;
+  height: 100px;
+  border: 10px solid deepskyblue;
+  background-color: #aecfff;
+}
+.box4 {
+  width: 100px;
+  height: 100px;
+  border: 3px solid deepskyblue;
+  background-color: #aecfff;
+  margin-top: 20px;
+}
+/*# sourceMappingURL=less混合.css.map */
