@@ -1,0 +1,84 @@
+/*.sanjiao{
+  width: 0;
+  height: 0;
+  overflow: hidden;
+
+  border-width: 20px;
+  border-color: transparent transparent red transparent;
+  border-style: dashed dashed solid dashed;   //  为了解决IE6 其他三边设置 transparent 显示黑边问题    可以将三边的 border-style 设置为 dashed
+}*/
+
+// 匹配模式
+.sanjiao(top,@width:20px,@color:red){
+  border-width: @width;
+  border-color: transparent transparent @color transparent;
+  border-style: dashed dashed solid dashed;
+}
+.sanjiao(right,@width:20px,@color:red){
+  border-width: @width;
+  border-color: transparent transparent transparent @color;
+  border-style: dashed dashed dashed solid;
+}
+
+.sanjiao(bottom,@width:20px,@color:red){
+  border-width: @width;
+  border-color: @color transparent transparent transparent;
+  border-style: solid dashed dashed dashed;
+}
+.sanjiao(left,@width:20px,@color:red){
+  border-width: @width;
+  border-color: transparent @color transparent transparent;
+  border-style: dashed solid dashed dashed;
+}
+.sanjiao(@_,@width:20px,@color:red){    // 这段表示不管匹配到那个 都会自动添加上这段   后面的@width 和 @solor 必须写上
+  width: 0px;
+  height: 0px;
+  overflow: hidden;
+}
+
+.top {
+  .sanjiao(top);
+}
+.right {
+  .sanjiao(right);
+}
+.bottom {
+  .sanjiao(bottom);
+}
+.left {
+  .sanjiao(left);
+}
+
+
+.pos(r){
+  position: relative;
+}
+.pos(a){
+  position: absolute;
+}
+.pos(f){
+  position: fixed;
+}
+
+.place_r{
+  width: 100px;
+  height: 100px;
+  background-color: gray;
+  .pos(r);
+}
+.place_a{
+  width: 100px;
+  height: 100px;
+  background-color: gray;
+  left: 200px;
+  top: 300px;
+  .pos(a);
+}
+.place_f{
+  width: 100px;
+  height: 100px;
+  background-color: gray;
+  left: 50%;
+  margin-left: -100px;
+  .pos(f);
+}
