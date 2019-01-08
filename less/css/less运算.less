@@ -1,0 +1,19 @@
+// 导入 less 文件
+@import "less混合";     // 导入 less混合.less 文件
+// @import (less) "a.css"     // 导入 css 文件前面需要加上 (less)  这样 a.css 中的代码会被编译到本文件中   注意: 在那个位置导入就会被编译到那个位置
+
+
+@width: 300px;
+@bgc: #ccc;
+
+.box{
+  width:@width+200;
+  height: 200px;
+  background-color: @bgc+20;
+}
+
+
+// less中的避免编译
+.test{
+  width: ~'calc(300px - 30px)';       // 写在 ~'xxx' 里面的代码不会被 less 编译
+}
