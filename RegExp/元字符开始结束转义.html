@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+<script>
+
+/* 匹配一个到多个数字 */
+var reg = /\d+/;
+var str = '新年2018快乐2019';
+reg.test(str);      //  true
+
+
+/* 匹配以一个到多个数字开始 */
+reg = /^\d+/;
+reg.test(str);      //  false
+
+
+/* 匹配以一个到多个数字开始结束并且中间也是数字 */
+reg = /^\d+$/;
+reg.test('2018');   //  true
+reg.test('2018新年快乐2019');   //  false
+reg.test('2');      //  true    ^ 或者 $ 只是一个修饰符或者声明，不会占据字符串的位置
+
+
+</script>
+
+</body>
+</html>
