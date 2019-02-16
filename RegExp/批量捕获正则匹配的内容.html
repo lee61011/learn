@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>批量捕获正则匹配到的内容</title>
+</head>
+<body>
+
+
+<script>
+
+    RegExp.prototype.myExecAll = function myExecAll() {
+        //	this 指当前需要处理的正则
+        //	str 指当前需要处理的字符串
+        var str = arguments[0] || '',
+            result = [];
+        //	首先应该判断 this 是否加了全局修饰符 g，如果没有加，为了防止下面执行出现死循环，我们只让其执行一次 exec 即可，把执行一次的结果直接返回
+        if (!this.global) {         //  如果没加全局修饰符g, 这里的 this.global 值为 false;
+            return this.exec(str);
+        }
+        var ary = this.exec(str);
+        while (ary) {
+            result.push(ary[0]);
+            ary = this.exec(str);
+        }
+        return result;
+    };
+
+    var reg = /\d+/g;
+    console.log(reg.myExecAll('新2018年2019快2020乐2021'))
+    
+
+</script>
+
+
+    
+</body>
+</html>
