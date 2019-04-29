@@ -7,7 +7,7 @@ class TodoList extends Component {
 
     this.state = {
       inputValue: '',
-      list: []
+      list: ['Learn Vue', 'Learn React', 'Learn JS']
     }
   }
 
@@ -18,20 +18,45 @@ class TodoList extends Component {
         <div>
           <input 
             value={ this.state.inputValue } 
-            onChange={ this.handerInputChange.bind(this) } />
-          <button>提交</button>
+            onChange={ this.handleInputChange.bind(this) } />
+          <button onClick={ this.handleBtnClick.bind(this) }>提交</button>
         </div>
         <ul>
-          <li>Learn React</li>
-          <li>Learn Vue</li>
+          {
+            this.state.list.map((item, index)=>{
+              return(
+                <li key={index}
+                  onClick={ this.handleItemDelete.bind(this, index) }>{ item }</li>
+              )
+            })
+          }
         </ul>
       </Fragment>
     )
   }
 
-  handerInputChange(e) {
+  handleInputChange(e) {
     this.setState({
       inputValue: e.target.value
+    })
+  }
+
+  /* 增加功能 */
+  handleBtnClick(){
+    this.setState({
+      list: [...this.state.list, this.state.inputValue],
+      inputValue: ''
+    })
+  }
+
+  /* 删除功能 */
+  handleItemDelete(index) {
+    /* console.log(index) */
+    const list = [...this.state.list]
+    list.splice(index, 1)
+
+    this.setState({
+      list: list
     })
   }
 }
