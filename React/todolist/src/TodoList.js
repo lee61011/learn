@@ -5,6 +5,9 @@ class TodoList extends Component {
 
   constructor(props) {
     super(props)
+    this.handleItemDelete = this.handleItemDelete.bind(this)
+    this.handleInputChange = this.handleInputChange.bind(this)
+    this.handleBtnClick = this.handleBtnClick.bind(this)
 
     this.state = {
       inputValue: '',
@@ -19,27 +22,26 @@ class TodoList extends Component {
         <div>
           <input 
             value={ this.state.inputValue } 
-            onChange={ this.handleInputChange.bind(this) } />
-          <button onClick={ this.handleBtnClick.bind(this) }>提交</button>
+            onChange={ this.handleInputChange } />
+          <button onClick={ this.handleBtnClick }>提交</button>
         </div>
         <ul>
-          {
-            this.state.list.map((item, index)=>{
-              return(
-                <div>
-                  {/* <li key={index}
-                  onClick={ this.handleItemDelete.bind(this, index) }>{ item }</li> */}
-                  <TodoItem 
-                    content={item}
-                    index={index}
-                    deleteItem={this.handleItemDelete.bind(this)}/>  
-                </div>
-              )
-            })
-          }
+          { this.getTodoItem() }
         </ul>
       </Fragment>
     )
+  }
+
+  getTodoItem() {
+    return this.state.list.map((item, index) => {
+      return (
+        <TodoItem
+          key={index}
+          content={item}
+          index={index}
+          deleteItem={this.handleItemDelete} />
+      )
+    })
   }
 
   handleInputChange(e) {
@@ -58,7 +60,6 @@ class TodoList extends Component {
 
   /* 删除功能 */
   handleItemDelete(index) {
-    /* console.log(index) */
     const list = [...this.state.list]
     list.splice(index, 1)
 
