@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var ary = [1,2,3,2,2,2,5,4,6,7,4,5,6,4,6,2,8,9,1];
+
+        /* for (var i = 0; i < ary.length - 1; i++) {
+            var cur = ary[i];
+
+            for (var j = i + 1; j < ary.length; j++) {
+                if (cur === ary[j]) {
+                    //  本次作比较的这一项和当前项相同，需要在原有数组中把作比较的这一项删除掉
+                    ary.splice(j, 1)
+
+                    //  数组塌陷问题：当时用 splice 删除数组中的某一项后，删除这一项后面的每一项索引都要向前进一位（在原有索引上减 1）；此时如果 j++，循环操作的值累加了，我们通过最新 j 获取的元素不是紧挨着删除这一项的元素，而是跳过一项获取的元素
+                    j--;    //  可以使用 j-- 解决
+                }
+            }
+        } */
+
+
+        /* 除了上面的使用 j-- 来解决数组塌陷问题，还可以这样做 */
+        for (var i = 0; i < ary.length - 1; i++) {
+            var cur = ary[i];
+            for (var j = i + 1; j < ary.length;) {
+
+                // if (cur === ary[i]) {
+                //     ary.splice(j, 1)
+                // } else {
+                //     j++;
+                // }
+
+                cur === ary[j] ? ary.splice(j, 1) : j++;
+            }
+        }
+
+        console.log(ary)
+    </script>
+</body>
+</html>
