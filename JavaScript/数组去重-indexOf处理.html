@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        var ary = [1, 2, 3, 2, 2, 2, 5, 4, 6, 7, 4, 5, 6, 4, 6, 2, 8, 9, 1];
+
+        //  利用 indexOf 来验证当前数组中是否包含某一项，包含把当前项删除掉（不兼容 IE678）
+        for (var i = 0; i < ary.length; i++) {
+            var cur = ary[i]
+            var curNextAry = ary.slice(i+1)
+
+            if (curNextAry.indexOf(cur) > -1) {
+                //  后面项组成的数组中包含当前项（当前这一项是重复的），删除掉当前项即可
+                ary.splice(i, 1)
+                i--
+            }
+        }
+
+        console.log(ary)
+    </script>
+
+</body>
+</html>
