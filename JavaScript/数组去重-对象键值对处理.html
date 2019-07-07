@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            遍历数组中的每一项，把每一项作为新对象的属性名和属性值存储起来
+            在每一次向对象中存储之前，首先看一下原有对象中是否包含了这个属性（typeof obj[xxx] === 'undefined' 说明当前对象中没有 xxx 这个属性）
+                如果已经存在这个属性，说明数组中的当前项是重复的（在原有数组汇总删除并不再向对象中存储这个结果）
+                如果不存在（把当前项作为对象的属性名和属性值存储进去）
+         */
+
+        var ary = [1, 2, 3, 2, 2, 2, 5, 4, 6, 7, 4, 5, 6, 4, 6, 2, 8, 9, 1];
+        var obj = {}
+
+        for (var i = 0; i < ary.length; i++) {
+            var cur = ary[i]
+            if (typeof obj[cur] !== 'undefined') {
+                
+                // ary.splice(i, 1)
+                //     使用 splice 对导致后面的索引向前进一位，如果后面有很多项，消耗的性能很大
+                //     可以把最后一项拿过来替换当前项，然后再把最后一项删除
+
+                ary[i] = ary[ary.length - 1]
+                ary.length--
+                i--
+                continue
+            }
+            obj[cur] = cur
+        }
+
+        console.log(ary)
+    </script>
+</body>
+</html>
