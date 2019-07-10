@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+    /* 
+        递归就是函数自己调用自己
+     */
+    
+    //  面试题：1~100 之间，把所有能被 3 并且能被 5 整除的数获取到，然后累加求和
+    
+    /*  普通做法
+    
+    var total = null;
+    for (var i = 1; i <= 100; i++) {
+        if (i%3 === 0 && i%5 === 0 ) {
+            total += i;
+        }
+    }
+    console.log(total) */
+
+
+    //  递归方法
+    function fn(num) {
+        if (num > 100) {
+            return 0;
+        }
+        if (num%15 === 0) {
+            return num + fn(num + 1);
+        }
+
+        return fn(num + 1);
+    }
+    console.log(fn(1));
+    
+
+
+
+    //  需求：1~10 以内所有偶数的乘积
+    function fn1(num) {
+        if (num <= 1) {
+            return 1;
+        }
+        if (num%2 === 0) {
+            return num * fn1(num - 1);
+        }
+
+        return fn1(num - 1);
+    }
+    var result = fn1(10);
+    console.log(result)
+
+    </script>
+</body>
+</html>
