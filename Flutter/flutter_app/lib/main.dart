@@ -16,30 +16,27 @@ class MyApp extends StatelessWidget {
         ),
         body: Center(
           child: Container(
-            child: new Text('Hello Flutter', style: TextStyle(fontSize: 40.0),),
-            
-            //  Alignment 属性是针对 Container 内 child 的对齐方式，也就是容器字内容的对齐方式，并不是容器本身的对齐方式
-            //  Alignment.center | centerLeft | centerRight | bottomCenter | bottomLeft | bottomRight | topLeft | topCenter | topRight
-            alignment: Alignment.topLeft,
+            //  image.asset(资源图片) | network(网络资源图片) | file(本地图片) | memory(加载 Unit8List 资源图片)
+            child: new Image.network(
+              'http://blogimages.jspang.com/blogtouxiang1.jpg',
+              // 'https://p3.ssl.qhimgs1.com/bdr/326__/t01f446ba25b5af3183.jpg',
+              // scale: 1.0,
 
-            width: 500.0,
-            height: 400.0,
-            // color: Colors.lightBlue,
+              //  fit: 根据父级容器控制图片的拉伸和挤压
+              //  fit: BoxFit.fill | contain | cover | fitWidth | fitHeight | scaleDown
+              fit: BoxFit.contain,
 
-            // padding: EdgeInsets.all(10.0),
-            padding: EdgeInsets.fromLTRB(10.0, 30.0, 0.0, 0.0),
+              //  图片的混合模式： color 是要混合的颜色，colorBlendMode 是混合模式
+              color: Colors.greenAccent,
+              colorBlendMode: BlendMode.darken,
 
-            // margin: EdgeInsets.all(10.0),
-            margin: EdgeInsets.fromLTRB(10.0, 20.0, 5.0, 0.0),
-
-            //  decoration 是 container 的修饰器，主要功能是设置背景和边框
-            decoration: new BoxDecoration(
-              //  这里在给 container 设置渐变色的时候，需要注释掉上面的 color，否则会起冲突
-              gradient: const LinearGradient(
-                colors: [Colors.lightBlue, Colors.greenAccent, Colors.purple]
-              ),
-              border: Border.all(width: 2.0, color: Colors.red)
+              //  repeat 图片重复
+              //  ImageRepeat.repeat | repeatX | repeatY
+              repeat: ImageRepeat.repeat,
             ),
+            width: 300.0,
+            height: 200.0,
+            color: Colors.lightBlue,
           ),
         ),
       ),
