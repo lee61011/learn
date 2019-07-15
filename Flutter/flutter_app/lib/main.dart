@@ -15,25 +15,16 @@ class MyApp extends StatelessWidget {
           title: Text('Welcome to Flutter')
         ),
         body: Center(
-          child: Text(
-            'TextAlign属性就是文本的对齐方式，它的属性值有如下几个',
-            //  textAlign: TextAlign.center | TextAlign.left | TextAlign.right | TextAlign.start | TextAlign.end
-            textAlign: TextAlign.left,
+          child: Container(
+            child: new Text('Hello Flutter', style: TextStyle(fontSize: 40.0),),
+            
+            //  Alignment 属性是针对 Container 内 child 的对齐方式，也就是容器字内容的对齐方式，并不是容器本身的对齐方式
+            //  Alignment.center | centerLeft | centerRight | bottomCenter | bottomLeft | bottomRight | topLeft | topCenter | topRight
+            alignment: Alignment.center,
 
-            //  maxLines: 设置最多显示的行数
-            maxLines: 1,
-
-            //  overflow: 设置文本溢出o
-            //  overflow: TextOverflow.ellipsis | TextOverflow.clip | TextOverflow.fade
-            overflow: TextOverflow.ellipsis,
-
-            //  style:  设置样式  参考：https://docs.flutter.io/flutter/painting/TextStyle-class.html
-            style: TextStyle(
-              fontSize: 25.0,
-              color: Color.fromARGB(255, 255, 150, 150),
-              decoration: TextDecoration.underline,
-              decorationStyle: TextDecorationStyle.dashed,
-            ),
+            width: 500.0,
+            height: 400.0,
+            color: Colors.lightBlue,
           ),
         ),
       ),
