@@ -2,15 +2,9 @@
 import 'package:flutter/material.dart';
 
 //  入口
-void main() => runApp(MyApp(
-  items: new List<String>.generate(1000, (i) => "Item $i"),
-));
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-
-  final List<String> items;
-  MyApp({Key key, @required this.items}):super(key:key);
-
   @override
   Widget build(BuildContext context) {
 
@@ -20,13 +14,27 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text('ListView Widget')
         ),
-        body: new ListView.builder(
-          itemCount: items.length,
-          itemBuilder: (context, index) {
-            return new ListTile(
-              title: new Text('${items[index]}'),
-            );
-          },
+        body: GridView(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            
+             // crossAxisSpacing: 网格间的空挡  | crossAxisCount: 网格的列数
+            crossAxisCount: 3,
+            mainAxisSpacing: 2.0,
+            crossAxisSpacing: 2.0,
+            childAspectRatio: 0.7
+          ),
+
+          children: <Widget>[
+            new Image.network('http://img5.mtime.cn/mt/2018/10/22/104316.77318635_180X260X4.jpg',fit: BoxFit.cover),
+            new Image.network('http://img5.mtime.cn/mt/2018/10/10/112514.30587089_180X260X4.jpg',fit: BoxFit.cover),
+            new Image.network('http://img5.mtime.cn/mt/2018/11/13/093605.61422332_180X260X4.jpg',fit: BoxFit.cover),
+            new Image.network('http://img5.mtime.cn/mt/2018/11/07/092515.55805319_180X260X4.jpg',fit: BoxFit.cover),
+            new Image.network('http://img5.mtime.cn/mt/2018/11/21/090246.16772408_135X190X4.jpg',fit: BoxFit.cover),
+            new Image.network('http://img5.mtime.cn/mt/2018/11/17/162028.94879602_135X190X4.jpg',fit: BoxFit.cover),
+            new Image.network('http://img5.mtime.cn/mt/2018/11/19/165350.52237320_135X190X4.jpg',fit: BoxFit.cover),
+            new Image.network('http://img5.mtime.cn/mt/2018/11/16/115256.24365160_180X260X4.jpg',fit: BoxFit.cover),
+            new Image.network('http://img5.mtime.cn/mt/2018/11/20/141608.71613590_135X190X4.jpg',fit: BoxFit.cover),
+          ],
         )
       ),
     );
