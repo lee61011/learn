@@ -12,30 +12,33 @@ class MyApp extends StatelessWidget {
       title: 'Welcome Flutter',
       home: Scaffold(
         appBar: AppBar(
-          title: Text('水平方向布局')
+          title: Text('垂直方向布局')
         ),
-        body: new Row(
+        body: Column(
+
+          //  主轴和副轴
+          //    main轴：如果你用 column 组件，那垂直就是主轴；如果你用 row 组件，那么水平就是主轴
+          //    cross轴：（副轴，是和主轴垂直的方向） 如果你用的是 row 组件，那么垂直就是副轴； Column 组件的副轴就是水平方向
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+
           children: <Widget>[
-            new RaisedButton(
-              onPressed: () {},
-              color: Colors.redAccent,
-              child: new Text('红色按钮')
-            ),
-
-            //  在按钮外面加上 Expanded 可以占据剩余宽度，类似于弹性盒子
-            Expanded(child: new RaisedButton(
-              onPressed: (){},
-              color: Colors.orangeAccent,
-              child: new Text('橙色按钮'),
-            ),),
-
-            new RaisedButton(
-              onPressed: (){},
-              color: Colors.pinkAccent,
-              child: new Text('粉色按钮'),
-            )
+            Text('are you ok?'),
+            Text("what's your problem?"),
+            Text("what's your name?"),
           ],
         )
+
+        //  页面居中显示
+        /* body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Center(child: Text('are you ok?')),
+            Center(child: Text("what's your problem?")),
+            Center(child: Text("what's your name?"))
+          ],
+        ) */
+      )
     );
   }
 }
