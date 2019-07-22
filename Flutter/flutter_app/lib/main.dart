@@ -16,11 +16,23 @@ class MyApp extends StatelessWidget {
           backgroundImage: new NetworkImage('https://images.pexels.com/photos/50582/selfie-monkey-self-portrait-macaca-nigra-50582.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
           radius: 100.0,
         ),
-        new Container(
+        /* new Container(
           decoration: new BoxDecoration(
             color: Colors.lightBlue,
           ),
           padding: EdgeInsets.all(5.0),
+          child: new Text('Hello Flutter'),
+        ), */
+
+        //  Positioned (层叠定位组件)：bottom | left | top | right | width | height
+        new Positioned(
+          top: 10.0,
+          left: 10.0,
+          child: new Text('Hello World'),
+        ),
+        new Positioned(
+          bottom: 10.0,
+          right: 10.0,
           child: new Text('Hello Flutter'),
         ),
       ],
@@ -30,7 +42,7 @@ class MyApp extends StatelessWidget {
       title: 'Welcome Flutter',
       home: Scaffold(
         appBar: AppBar(
-          title: Text('垂直方向布局')
+          title: Text('层叠布局')
         ),
         body: Center(child: stack),
       )
