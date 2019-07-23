@@ -8,34 +8,29 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    var stack = new Stack(
-      alignment: const FractionalOffset(0.5, 0.8),
-      children: <Widget>[
-        //  CircleAvatar 这个组件经常用来做头像，组件里面有个 radius 的值可以设置图片的弧度
-        new CircleAvatar(
-          backgroundImage: new NetworkImage('https://images.pexels.com/photos/50582/selfie-monkey-self-portrait-macaca-nigra-50582.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
-          radius: 100.0,
-        ),
-        /* new Container(
-          decoration: new BoxDecoration(
-            color: Colors.lightBlue,
+    var card = new Card(
+      child: Column(
+        children: <Widget>[
+          ListTile(
+            title: new Text('吉林省吉林市昌邑区',style: TextStyle(fontWeight: FontWeight.w500),),
+            subtitle: new Text('技术胖:123456789'),
+            leading: new Icon(Icons.account_box, color: Colors.lightBlue,),
           ),
-          padding: EdgeInsets.all(5.0),
-          child: new Text('Hello Flutter'),
-        ), */
-
-        //  Positioned (层叠定位组件)：bottom | left | top | right | width | height
-        new Positioned(
-          top: 10.0,
-          left: 10.0,
-          child: new Text('Hello World'),
-        ),
-        new Positioned(
-          bottom: 10.0,
-          right: 10.0,
-          child: new Text('Hello Flutter'),
-        ),
-      ],
+          new Divider(),
+          ListTile(
+            title: new Text('北京市海淀区中国科技大学', style: TextStyle(fontWeight: FontWeight.w500),),
+            subtitle: new Text('技术胖:123456789'),
+            leading: new Icon(Icons.account_box, color: Colors.lightBlue,),
+          ),
+          new Divider(),
+          ListTile(
+            title: new Text('河南省濮阳市百姓办公楼', style: TextStyle(fontWeight: FontWeight.w500),),
+            subtitle: new Text('技术胖:123456789'),
+            leading: new Icon(Icons.account_box, color: Colors.lightBlue,),
+          ),
+          new Divider(),  
+        ],
+      ),
     );
 
     return MaterialApp(
@@ -44,7 +39,7 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text('层叠布局')
         ),
-        body: Center(child: stack),
+        body: Center(child: card),
       )
     );
   }
