@@ -11,14 +11,14 @@ void main() {
   runApp(MaterialApp(
     title: '数据传递案例',
     home: ProductList(
-      products: List.generate(20, (i)=>Product('商品 $i','这是一个商品详情，编号为：$i'))
+      products: List.generate(20, (i)=>Product('商品 $i','这是一个商品详情，编号为：$i')),
     ),
   ));
 }
 
 class ProductList extends StatelessWidget {
   final List<Product> products;
-  ProductList({Key Key,@required this.products}):super(key:key);
+  ProductList({Key key,@required this.products}):super(key:key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +31,7 @@ class ProductList extends StatelessWidget {
             onTap: (){
               Navigator.push(context, 
                 MaterialPageRoute(
-                  builder: (context)=>new ProductDetail(products[index])
+                  builder: (context)=>new ProductDetail(product:products[index])
                 )
               );
             },
