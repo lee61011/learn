@@ -22,7 +22,11 @@ class Books extends Component {
                 <ul>
                     {
                         this.state.list.map((item, index) => {
-                            return <li key={index+item}>{item}</li>
+                            return (
+                                <li 
+                                    key={index + item}
+                                    onClick={this.deleteItem.bind(this, index)}>{item}</li>
+                            )
                         })
                     }
                 </ul>
@@ -40,6 +44,16 @@ class Books extends Component {
         this.setState({
             list: [...this.state.list, this.state.inputValue],
             inputValue: ''
+        })
+    }
+    deleteItem(index) {
+        //  React 是禁止直接操作 state 的
+        //  this.state.list.splice(index, 1)
+
+        let list = this.state.list
+        list.splice(index, 1)
+        this.setState({
+            list: list
         })
     }
 }
