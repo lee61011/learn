@@ -1,4 +1,5 @@
 import React, {Component, Fragment} from 'react'
+import BookItem from './BookItem'
 
 class Books extends Component {
 
@@ -23,9 +24,15 @@ class Books extends Component {
                     {
                         this.state.list.map((item, index) => {
                             return (
-                                <li 
+                                /* 
+                                    <li
                                     key={index + item}
                                     onClick={this.deleteItem.bind(this, index)}>{item}</li>
+                                */
+
+                                <div>
+                                    <BookItem />
+                                </div>
                             )
                         })
                     }
