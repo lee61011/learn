@@ -31,7 +31,11 @@ class Books extends Component {
                                 */
 
                                 <div>
-                                    <BookItem />
+                                    <BookItem 
+                                        key={index+item} 
+                                        content={item}
+                                        index={index}
+                                        deleteItem={this.deleteItem.bind(this)}/>
                                 </div>
                             )
                         })
