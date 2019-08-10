@@ -17,10 +17,13 @@ class Books extends Component {
             //  但是有时候我们的布局就偏不需要这层包裹，我们可以引入 Fragment 标签来替换 div 标签，在浏览器的 Elements 中查看，最外层已经没有包裹了
             <Fragment>
                 <div>
-                    <input value={this.state.inputValue} onChange={this.inputChange.bind(this)} />
+                    <input 
+                        value={this.state.inputValue} 
+                        onChange={this.inputChange.bind(this)}
+                        ref={(input)=>{this.input=input}} />
                     <button onClick={this.addList.bind(this)}>增加书籍</button>
                 </div>
-                <ul>
+                <ul ref={(ul)=>{this.ul=ul}}>
                     {
                         this.state.list.map((item, index) => {
                             return (
@@ -48,14 +51,21 @@ class Books extends Component {
     inputChange(e) {
         // console.log(e.target.value)
         this.setState({
-            inputValue: e.target.value
+            //  inputValue: e.target.value
+            //  通过 ref 属性设置值
+            inputValue: this.input.value
         })
     }
     addList(){
         this.setState({
             list: [...this.state.list, this.state.inputValue],
             inputValue: ''
+        }, ()=>{
+            console.log(this.ul.querySelectorAll('div').length)
         })
+
+        //  setState 是一个异步函数，还没等虚拟 DOM 渲染，console.log() 就已经执行了，所以返回的数量会少一个；可以在上面的 setState 回调函数中解决
+        //  console.log(this.ul.querySelectorAll('div').length);
     }
     deleteItem(index) {
         //  React 是禁止直接操作 state 的
