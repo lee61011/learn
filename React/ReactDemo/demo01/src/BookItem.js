@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 
 class BookItem extends Component {
-    state = {  }
+    state = {}
     render() { 
         return ( 
-            <div onClick={this.handleClick.bind(this)}>{this.props.content}</div>
+            <li onClick={this.handleClick.bind(this)}>
+                {this.props.content}
+            </li>
          );
     }
 
@@ -12,6 +15,12 @@ class BookItem extends Component {
         //  console.log(this.props.index)
         this.props.deleteItem(this.props.index)
     }
+}
+
+BookItem.propTypes = {
+    content: PropTypes.string,
+    deleteItem: PropTypes.func,
+    index: PropTypes.number.isRequired
 }
  
 export default BookItem;
