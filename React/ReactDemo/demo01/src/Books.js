@@ -1,4 +1,5 @@
 import React, {Component, Fragment} from 'react'
+import axios from 'axios'
 import BookItem from './BookItem'
 
 class Books extends Component {
@@ -9,6 +10,18 @@ class Books extends Component {
             inputValue: '',
             list: ['JavaScript 高级程序设计第三版', 'Vue.js 实战']
         }
+    }
+
+    componentDidMount() {
+        axios.get('https://www.easy-mock.com/mock/5b336ab6e312d1110939a921/SmileVue/getBookName')
+            .then(res => {
+                console.log('请求成功：' + JSON.stringify(res.data.data))
+
+                this.setState({
+                    list: res.data.data
+                })
+            })
+            .catch(error => console.log('请求失败：' + error))
     }
 
     render(){
