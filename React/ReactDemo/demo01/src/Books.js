@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react'
 import axios from 'axios'
 import BookItem from './BookItem'
+import Donghua from './Donghua'
 
 class Books extends Component {
 
@@ -57,6 +58,8 @@ class Books extends Component {
                         })
                     }
                 </ul>
+
+                <Donghua />
             </Fragment>
         )
     }
