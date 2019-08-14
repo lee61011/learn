@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { CSSTransition } from 'react-transition-group'
 import './style.css'
 
 class Donghua extends Component {
@@ -12,7 +13,13 @@ class Donghua extends Component {
     render() { 
         return ( 
             <div>
-                <h2 className={this.state.isShow ? 'show' : 'hide'}>显示</h2>
+                <CSSTransition
+                    in={this.state.isShow}
+                    timeout={2000}
+                    classNames="msg-text"
+                    unmountOnExit>
+                    <h2>显示</h2>
+                </CSSTransition>
                 <div><button onClick={this.toToggole}>显示 / 隐藏</button></div>
             </div>
         );
