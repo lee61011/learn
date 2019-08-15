@@ -1,4 +1,5 @@
 import React, {Component, Fragment} from 'react'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import axios from 'axios'
 import BookItem from './BookItem'
 import Donghua from './Donghua'
@@ -38,25 +39,33 @@ class Books extends Component {
                     <button onClick={this.addList.bind(this)}>增加书籍</button>
                 </div>
                 <ul ref={(ul)=>{this.ul=ul}}>
-                    {
-                        this.state.list.map((item, index) => {
-                            return (
-                                /* 
-                                    <li
-                                    key={index + item}
-                                    onClick={this.deleteItem.bind(this, index)}>{item}</li>
-                                */
+                    <TransitionGroup>
+                        {
+                            this.state.list.map((item, index) => {
+                                return (
+                                    /* 
+                                        <li
+                                        key={index + item}
+                                        onClick={this.deleteItem.bind(this, index)}>{item}</li>
+                                    */
 
-                                <div>
-                                    <BookItem 
-                                        key={index+item} 
-                                        content={item}
-                                        index={index}
-                                        deleteItem={this.deleteItem.bind(this)}/>
-                                </div>
-                            )
-                        })
-                    }
+                                    <CSSTransition
+                                        timeout={1000}
+                                        classNames='msg-text'
+                                        unmountOnExit
+                                        appear={true}
+                                        key={index+item}
+                                    >
+                                        <BookItem
+                                            key={index + item}
+                                            content={item}
+                                            index={index}
+                                            deleteItem={this.deleteItem.bind(this)} />
+                                    </CSSTransition>
+                                )
+                            })
+                        }
+                    </TransitionGroup>
                 </ul>
 
                 <Donghua />
