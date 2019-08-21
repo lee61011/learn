@@ -36,7 +36,7 @@ class TodoList extends Component {
                     <List 
                         bordered
                         dataSource={this.state.list}
-                        renderItem={item=>(<List.Item>{item}</List.Item>)}
+                        renderItem={item=>(<List.Item onClick={this.deleteItem.bind(this,index)}>{item}</List.Item>)}
                     />
                 </div>
             </div>
@@ -58,6 +58,13 @@ class TodoList extends Component {
     }
     storeChange(){
         this.setState(store.getState())
+    }
+    deleteItem(index){
+        const action = {
+            type: 'deleteItem',
+            index
+        }
+        store.dispatch(action)
     }
 }
  
