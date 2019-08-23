@@ -28,7 +28,8 @@ class TodoList extends Component {
                     <Input 
                         placeholder={this.state.inputValue} 
                         style={{width: '250px', marginRight: '10px'}}
-                        onChange={this.changeInputValue} />
+                        onChange={this.changeInputValue}
+                        value={this.state.inputValue} />
                     <Button 
                         type="primary"
                         onClick={this.clickBtn}>添加</Button>
@@ -37,7 +38,7 @@ class TodoList extends Component {
                     <List 
                         bordered
                         dataSource={this.state.list}
-                        renderItem={item=>(<List.Item onClick={this.deleteItem.bind(this,index)}>{item}</List.Item>)}
+                        renderItem={(item, index)=>(<List.Item onClick={this.deleteItem.bind(this,index)}>{item}</List.Item>)}
                     />
                 </div>
             </div>
