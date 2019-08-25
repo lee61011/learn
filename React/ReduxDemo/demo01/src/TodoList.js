@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import 'antd/dist/antd.css'
+import axios from 'axios'
 // import { Input, Button, List } from 'antd'
 import TodoListUI from './TodoListUI'
 
 import store from './store'
-import { changeInputAction, addItemAction, deleteItemAction } from './store/actionCreators'
+import { changeInputAction, addItemAction, deleteItemAction, getListAction } from './store/actionCreators'
 
 /* const data = [
     '早8点开晨会，分配今天的开发工作',
@@ -33,6 +34,14 @@ class TodoList extends Component {
                 deleteItem = {this.deleteItem}
             />
         )
+    }
+
+    componentDidMount(){
+        axios.get('https://www.easy-mock.com/mock/5cfcce489dc7c36bd6da2c99/xiaojiejie/getList').then((res)=>{
+            const data = res.data
+            const action = getListAction(data)
+            store.dispatch(action)
+        })
     }
 
     changeInputValue(e) {
