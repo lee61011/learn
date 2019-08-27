@@ -4,7 +4,8 @@ import 'antd/dist/antd.css'
 import TodoListUI from './TodoListUI'
 
 import store from './store'
-import { changeInputAction, addItemAction, deleteItemAction, getTodoList } from './store/actionCreators'
+// import { changeInputAction, addItemAction, deleteItemAction, getTodoList } from './store/actionCreators'
+import { changeInputAction, addItemAction, deleteItemAction, getMyListAction } from './store/actionCreators'
 
 /* const data = [
     '早8点开晨会，分配今天的开发工作',
@@ -42,8 +43,12 @@ class TodoList extends Component {
             store.dispatch(action)
         })
     } */
-    componentDidMount(){
+    /* componentDidMount(){
         const action = getTodoList()
+        store.dispatch(action)
+    } */
+    componentDidMount(){
+        const action = getMyListAction()
         store.dispatch(action)
     }
 

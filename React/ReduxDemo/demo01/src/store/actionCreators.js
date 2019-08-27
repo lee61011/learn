@@ -1,5 +1,5 @@
-import axios from 'axios'
-import { CHANGE_INPUT, ADD_ITEM, DELETE_ITEM, GET_LIST } from './actionTypes'
+// import axios from 'axios'
+import { CHANGE_INPUT, ADD_ITEM, DELETE_ITEM, GET_LIST, GET_MY_LIST } from './actionTypes'
 
 export const changeInputAction = (value) => ({
     type: CHANGE_INPUT,
@@ -20,7 +20,8 @@ export const getListAction = (data) => ({
     data
 })
 
-export const getTodoList = () => {
+/* redux-thunk: */
+/* export const getTodoList = () => {
     return (dispatch) => {
         axios.get('https://www.easy-mock.com/mock/5cfcce489dc7c36bd6da2c99/xiaojiejie/getList').then((res)=>{
             const data = res.data
@@ -28,4 +29,9 @@ export const getTodoList = () => {
             dispatch(action)
         })
     }
-}
+} */
+
+/* redux-saga */
+export const getMyListAction = () => ({
+    type: GET_MY_LIST
+})
