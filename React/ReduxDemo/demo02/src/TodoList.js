@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 class TodoList extends Component {
     
     constructor(props){
-        super()
+        super(props)
         this.state = store.getState()
     }
 
@@ -13,7 +13,10 @@ class TodoList extends Component {
         return ( 
             <div>
                 <div>
-                    <input value={this.props.inputValue}/>
+                    <input 
+                        value={this.props.inputValue}
+                        onChange={this.props.inputChange}
+                    />
                     <button>添加</button>
                 </div>
                 <ul>
@@ -31,5 +34,17 @@ const stateToProps = (state) => {
         inputValue: state.inputValue
     }
 }
+
+const dispatchToProps = (dispatch) => {
+    return {
+        inputChange(e){
+            let action = {
+                type: 'change_input',
+                value: e.target.value
+            }
+            dispatch(action)
+        }
+    }
+}
  
-export default connect(stateToProps, null)(TodoList);
+export default connect(stateToProps, dispatchToProps)(TodoList);
