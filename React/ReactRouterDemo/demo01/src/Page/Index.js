@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 class Index extends Component {
     constructor(props) {
@@ -13,7 +13,7 @@ class Index extends Component {
         }
     }
     render() { 
-        return ( 
+        /* return ( 
             <ul>
                 {
                     this.state.list.map((item, index)=>{
@@ -25,7 +25,9 @@ class Index extends Component {
                     })
                 }
             </ul>
-        );
+        ); */
+
+        return <Redirect to="/home/" />
     }
 }
  
