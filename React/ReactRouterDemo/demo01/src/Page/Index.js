@@ -1,12 +1,31 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 
 class Index extends Component {
     constructor(props) {
         super(props);
-        this.state = {  }
+        this.state = { 
+            list: [
+                {uid: 123, title: 'Title-123'},
+                {uid: 456, title: 'Title-456'},
+                {uid: 789, title: 'Title-789'}
+            ]
+        }
     }
     render() { 
-        return ( <h2>Index 页面</h2> );
+        return ( 
+            <ul>
+                {
+                    this.state.list.map((item, index)=>{
+                        return (
+                            <li key={index}>
+                                <Link to={'/list/' + item.uid}> {item.title} </Link>
+                            </li>
+                        )
+                    })
+                }
+            </ul>
+        );
     }
 }
  
