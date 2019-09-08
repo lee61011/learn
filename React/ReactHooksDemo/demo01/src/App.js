@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Example2 from './Example2'
 import Example3 from './Example3'
+import Example4 from './Example4'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -17,6 +18,11 @@ function App() {
       <div>
         <h2>useEffect 代替常用生命周期函数</h2>
         <Example3></Example3>
+      </div>
+
+      <div>
+        <h2>useContext 父子组件传值</h2>
+        <Example4></Example4>
       </div>
     </div>
   )
