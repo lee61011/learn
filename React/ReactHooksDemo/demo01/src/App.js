@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Example2 from './Example2'
 import Example3 from './Example3'
 import Example4 from './Example4'
+import Example5 from './Example5'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -23,6 +24,11 @@ function App() {
       <div>
         <h2>useContext 父子组件传值</h2>
         <Example4></Example4>
+      </div>
+
+      <div>
+        <h2>useRedux 简单使用</h2>
+        <Example5></Example5>
       </div>
     </div>
   )
