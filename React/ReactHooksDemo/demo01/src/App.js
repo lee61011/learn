@@ -3,6 +3,7 @@ import Example2 from './Example2'
 import Example3 from './Example3'
 import Example4 from './Example4'
 import Example5 from './Example5'
+import Example6 from './Example6/Example6'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -29,6 +30,11 @@ function App() {
       <div>
         <h2>useRedux 简单使用</h2>
         <Example5></Example5>
+      </div>
+
+      <div>
+        <h2>useRedux 代替 Redux 小案例1</h2>
+        <Example6></Example6>
       </div>
     </div>
   )
