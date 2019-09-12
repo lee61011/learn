@@ -5,6 +5,7 @@ import Example4 from './Example4'
 import Example5 from './Example5'
 import Example6 from './Example6/Example6'
 import Example7 from './Example7/Example7'
+import Example8 from './Example8'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -41,6 +42,11 @@ function App() {
       <div>
         <h2>useMemo 优化 ReactHooks 程序性能</h2>
         <Example7></Example7>
+      </div>
+
+      <div>
+        <h2>useRef获取DOM元素和保存变量</h2>
+        <Example8></Example8>
       </div>
     </div>
   )
