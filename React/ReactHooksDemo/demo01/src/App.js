@@ -6,6 +6,7 @@ import Example5 from './Example5'
 import Example6 from './Example6/Example6'
 import Example7 from './Example7/Example7'
 import Example8 from './Example8'
+import Example9 from './Example9'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -47,6 +48,11 @@ function App() {
       <div>
         <h2>useRef获取DOM元素和保存变量</h2>
         <Example8></Example8>
+      </div>
+
+      <div>
+        <h2>自定义 Hooks 函数获取窗口大小</h2>
+        <Example9></Example9>
       </div>
     </div>
   )
