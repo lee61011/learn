@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
 import Nav from '../components/nav'
+import Jspang from '../components/jspang'
 
 const Home = () => (
   <div>
@@ -36,6 +37,9 @@ const Home = () => (
             <p>Was this tool helpful? Let us know how we can improve it!</p>
           </a>
         </Link>
+        <div>
+          <Jspang>按钮组件</Jspang>
+        </div>
       </div>
     </div>
 
