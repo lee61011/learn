@@ -1,46 +1,40 @@
-/* 标签式导航 */
-/* import React from 'react'
-import Link from 'next/link'
-
-const Home = () => (
-  <>
-    <div>我是首页</div>
-    <div><Link href="/jspangA"><a>去 JspangA 页面</a></Link></div>
-    <div><Link href="/jspangB"><a>去 JspangB 页面</a></Link></div>
-  </>
-)
-
-export default Home */
-
-
-/* 编程式导航 */
 import React from 'react'
 import Link from 'next/link'
 import Router from 'next/router'
 
+/* function gotoBooks() {
+  Router.push('/books?name=JavaScript')
+} */
+function gotoBooks() {
+  Router.push({
+    pathname: '/books',
+    query: {
+      name: 'JavaScript'
+    }
+  })
+}
+
 const Home = () => {
-  function gotoA() {
-    Router.push('/jspangA')
-  }
-  return (
+  /* return (
     <>
       <div>我是首页</div>
       <div>
-        <Link href="/jspangA">
-          <a>
-            <span>去JspangA页面</span>
-            <span>前端博客</span>
-          </a>
-        </Link>
-      </div>
-      <div>
-        <Link href="/jspangB"><a>去JspnagB页面</a></Link>
-      </div>
-      <div>
-        <button onClick={gotoA}>去JspangA页面</button>
+        <Link href="/books?name=JavaScript"><a>JavaScript</a></Link>
+        <br />
+        <Link href="/books?name=React"><a>React</a></Link>
       </div>
     </>
+  ) */
+
+
+  /* 编程式跳转传递参数 */
+  return (
+    <div>
+      <Link href={{pathname: '/books', query: {name: 'React'}}}><a>React</a></Link>
+      <br />
+      <button onClick={gotoBooks}>JavaScript</button>
+    </div>
   )
 }
 
-export default Home
+export default Home`
