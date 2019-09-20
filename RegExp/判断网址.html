@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>使用正则判断网址</title>
+</head>
+<body>
+    <script>
+        /* 在输入框中如何判断输入的是一个正确的网址，例如：用户输入一个字符串，验证是否符合 URL 网址的格式 */
+
+        //  URL 格式：
+        //  1. 协议://  http/https/ftp
+        //  2. 域名
+        //      www.baidu.com
+        //      baidu.com
+        //      kbs.sport.qq.com
+        //      kbs.sport.qq.com.cn
+        //  3. 请求路径
+        //      /
+        //      /index.html
+        //      /stu/index.html
+        //      /stu
+        //  4. 问号传参
+        //      ?xxx=xxx&xxx=xxx
+        //  5. 哈希值
+        //      #xxx
+
+        let str = "http://www.baidu.com/index.html?lx=1&from=wx#video";
+        let reg = /^(?:(http|https|ftp):\/\/)?((?:[\w-]+\.)+[a-z0-9]+)((?:\/[^/?#]*)+)?(\?[^#]+)?(#.+)?$/i;
+
+        console.log(reg.exec(str))
+
+        //  ((http|https|ftp):\/\/)?  ==> 匹配协议：? 表示出现 0 次到 1 次
+        //  (([\w-]+\.)+[a-z0-9]+)    ==> 匹配域名：+ 表示出现 1 次到多次 (xxx. 出现一到多次, com/cn 出现一到多次)
+        //  () 中的 ?: 表示正则小分组 只匹配不捕获
+    
+    </script>
+</body>
+</html>
