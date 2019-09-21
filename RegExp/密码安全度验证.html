@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>密码安全度验证</title>
+</head>
+<body>
+    
+    <script>
+        /* 编写一条正则，用来验证此规则：一个 6~16 位的字符串，必须同时包含有大小写字母和数字 */
+
+        let reg = /(?!^[a-zA-Z]+$)(?!^[0-9]+$)(?!^[a-z0-9]+$)(?!^[A-Z0-9]+$)^[a-zA-Z0-9]{6,16}$/;
+
+        //  ?! 表示 负向预查；匹配不满足这个条件的
+        //      (?!^[a-zA-Z]+$)：表示不能是纯字母
+        //      (?!^[0-9]+$)：表示不能是纯数字
+        //      (?!^[a-z0-9]+$)：表示不能只包含小写字母和数字
+        //      (?!^[A-Z0-9]+$)：表示不能只包含大写字母和数字
+
+        //  ?= (正向预查)：必须满足这个条件
+        //  ?! (负向预查)：必须不满足这个条件
+
+
+
+        console.log(reg.test('aaabbbC123'))
+
+
+        //  1-10 位：数字、字母、下划线组成字符串，必须有 _
+        let reg1 = /(?=_)\w+/           //  正向预查：匹配数字字母下划线并且必须包含 _
+        let reg2 = /(?!^[a-zA-Z0-9]+$)^\w{1,10}$/;      //  1-10 位数字字母下划线，并且不能只是数字或字母
+    </script>
+
+</body>
+</html>
