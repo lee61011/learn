@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>用正则给英文单词前后加空格</title>
+</head>
+<body>
+    <script>
+        /* 英文字母汉字组成的字符串，用正则给英文单词前后加空格 */
+            let str = "xin新nian年kuai快le乐",
+                reg = /\b[a-z]+\b/ig;
+            str = str.replace(reg, value => {
+                return " " + value + " ";
+            }).trim();		//	String.prototype.trim/.trimLeft/.trimRight 去除字符串首尾空格
+
+            console.log(str)
+    </script>
+</body>
+</html>
