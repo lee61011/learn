@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>合并数组</title>
+</head>
+<body>
+    <script>
+        let ary1 = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2'];
+        let ary2 = ['A', 'B', 'C', 'D'];
+        //	合并后的数组为：['A1','A2','A','B1','B2','B','C1','C2','C','D1','D2','D']
+
+
+        /* 方法一 */
+        /* ary2 = ary2.map(item => item + '哈哈');
+        let arr = ary1.concat(ary2);
+        arr = arr.sort((a, b) => a.localeCompare(b)).map(item => {
+            return item.replace('哈哈', '');
+        });
+        console.log(arr); */
+
+
+        /* 方法二 */
+        let n = 0;
+        for (let i = 0; i < ary2.length; i++) {
+            let item2 = ary2[i];
+            for (let k = 0; k < ary1.length; k++) {
+                let item1 = ary1[k];
+                if (item1.includes(item2)) {
+                    n = k;
+                }
+            }
+            //  把当前 item2 这一项插入到 ary1 中 n 的后面；n 表示 ary1 中最后一项包含 item2（ary2 中当前项字母） 的索引
+            ary1.splice(n+1, 0, item2);
+        }
+        console.log(ary1);
+    </script>
+</body>
+</html>
