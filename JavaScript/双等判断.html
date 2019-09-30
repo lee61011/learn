@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>双等判断</title>
+</head>
+<body>
+    <script>
+        /* 
+            需求：
+        */
+        var a = '?';
+        if (a == 1 && a == 2 && a == 3) {
+            console.log(1)
+        }
+
+
+        /* 
+            分析：
+        */
+
+        /*
+            == 进行比较的时候，如果左右两边数据类型不一样，则先转换为相同的数据类型，然后再进行比较
+                1. {}=={} 两个对象进行比较，比较的是堆内存的地址
+                2. null==undefined 相等的	|	null===undefined 不相等
+                3. NaN==NaN 不相等		NaN 和谁都不相等
+                4. [12]=="12"	对象和字符串比较，是把对象 toString() 转换为字符串后在进行比较
+                5. 剩余所有情况在进行比较的时候，都是转换为数字（前提是数据类型不一样）
+                    对象转数字：先转换为字符串，然后再转换为数字
+                    字符串转数字：只要出现一个非数字字符，结果就是 NaN
+                    布尔转数字：true=>1	false=>0
+                    null 转数字 0
+                    undefined 转数字 NaN
+        */
+
+
+
+        /* 
+            代码实现：
+        */
+
+        //  方法一：
+        //	对象和数字比较：先把对象 .toString() 变为字符串，然后在转换为数字
+        var a = {
+            n: 0,
+            toString: function () {	//	私有的属性方法
+                return ++this.n;
+            }
+        };
+        //	a.toString();	//	此时调取的就不再是 Object.prototype.toString 了，调取的是自己私有的
+        if (a == 1 && a == 2 && a == 3) {
+            console.log('方法一：OK');
+        }
+
+
+        //  方法二：
+        //	shift：删除数组第一项，把删除的内容返回，原数组改变
+        let aa = [1, 2, 3];
+        aa.toString = aa.shift;
+        if (aa == 1 && aa == 2 && aa == 3) {
+            console.log('方法二：OK')
+        }
+
+        //  方法三：
+        let aaa = 0;
+        Object.defineProperty(window, 'aaa', {
+            get: function () {
+                this.value ? this.value++ : this.value = 1;
+                return this.value;
+            }
+        });
+        if (aaa == 1 && aaa == 2 && aaa == 3) {
+            console.log('方法三：OK')
+        }
+    </script>
+</body>
+</html>
