@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>旋转数组</title>
+</head>
+<body>
+    <script>
+        /*
+            旋转数组：
+            给定一个数组，将数组中的元素向右移动 K 个位置，其中 k 是非负数
+            输入：[1,2,3,4,5,6,7] 和 k = 3
+            输出：[5,6,7,1,2,3,4]
+            解释：
+            向右旋转 1 步：[7,1,2,3,4,5,6]
+            向右旋转 2 步：[6,7,1,2,3,4,5]
+            向右旋转 3 步：[5,6,7,1,2,3,4]
+            
+            输入：[-1,-100,3,99] 和 k = 2
+            输出：[3,99,-1,-100]
+            解释：
+            向右先转 1 步：[99,-1,-100,3]
+            向右旋转 2 步：[3,99,-1,-100]
+        */
+
+        function rotate(k) {
+            // 参数处理
+            if (k < 0 || k === 0 || k === this.length) return this;
+            if (k > this.length) k = k % this.length;
+            //	旋转数组
+            //	return this.slice(-k).concat(this.slice(0, this.length - k)); // 或者
+            //	return [...this.splice(this.length - k), ...this];			//	或者
+
+            /* for (let i = 0; i < k; i++) {
+                this.unshift(this.pop());
+            } */
+            new Array(k).fill('').forEach(() => this.unshift(this.pop()));
+            return this;
+        }
+        Array.prototype.rotate = rotate;
+
+        let arr = [1, 2, 3, 4, 5, 6, 7];
+        console.log(arr.rotate(9));
+    </script>
+</body>
+</html>
