@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>$attr 遍历元素属性</title>
+</head>
+<body>
+
+    <div id="AA" class="box clearfix"></div>
+    <div myIn="1"></div>
+    <div class="content box"></div>
+    <div name="BB"></div>
+    <div></div>
+    <div id="AA"></div>
+    <div myIn="1" class="clearfix"></div>
+    <div class="box"></div>
+    <div myIn="2"></div>
+    <div name="BB"></div>
+
+    <script>
+        function $attr(property, value) {
+            //	获取当前页面中所有的标签
+            let elements = document.getElementsByTagName('*'),
+                arr = [];
+            //	[].forEach.call(elements, item=>{})
+            elements = Array.from(elements);
+            elements.forEach(item => {
+                //	存储的是当前元素 property 对应的属性值
+                let itemValue = item.getAttribute(property);
+                if (property === 'class') {
+                    //	样式类属性名要特殊的处理
+                    //	\b 是正则的边界匹配，匹配一个完整单词
+                    new RegExp("\\b" + value + "\\b").test(itemValue) ? arr.push(item) : null;
+                    return;
+                }
+                if (itemValue === value) {
+                    //	获取的值和传递的值校验成功：当前就是我们想要的
+                    arr.push(item);
+                }
+            })
+
+            return arr;
+        }
+
+        // let ary = $attr('class', 'box')
+        let ary = $attr('myIn', '1')
+
+        console.log(ary)
+    </script>
+</body>
+</html>
