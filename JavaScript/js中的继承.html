@@ -18,13 +18,24 @@
         function B(y) {
             this.y = y;
         }
+        /* B.prototype.getY = function () {
+            console.log(this.y);
+        }; 
+        
+        let b1 = new B(100);
+        console.log('b1.y => ' + b1.y);
+        console.log('b1.getY() =>' + b1.getY()); */
+
+        B.prototype = new A(200);
+        B.prototype.constructor = B;
         B.prototype.getY = function () {
             console.log(this.y);
         };
 
         let b1 = new B(100);
         console.log('b1.y => ' + b1.y);
-        console.log('b1.getY() =>' + b1.getY());
+        console.log('b1.getY() =>' + b1.getY);
+        console.log('b1.getX() =>' + b1.getX);
     </script>
 </body>
 </html>
