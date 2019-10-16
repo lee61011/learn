@@ -7,6 +7,8 @@
     <title>Document</title>
 </head>
 <body>
+    <!-- 原型继承
+        
     <script>
         function A(x) {
             this.x = x;
@@ -36,6 +38,33 @@
         console.log('b1.y => ' + b1.y);
         console.log('b1.getY() =>' + b1.getY);
         console.log('b1.getX() =>' + b1.getX);
+    </script> 
+-->
+
+    <!-- call 继承 -->
+    <script>
+        function A(x) {
+            this.x = x;
+        }
+        A.prototype.getX = function () {
+            console.log(this.x)
+        }
+
+        function B(y) {
+            //  this: B 的实例 b1
+            A.call(this, 200);   //  b1.x = 200
+            this.y = y;
+        }
+        B.prototype.getY = function () {
+            console.log(this.y)
+        }
+
+        let b1 = new B(100);
+        console.log(b1.y);
+        console.log(b1.x);
+        console.log('b1.getY ---- ' + b1.getY);
+        console.log('b1.getX ---- ' + b1.getX);
     </script>
+
 </body>
 </html>
