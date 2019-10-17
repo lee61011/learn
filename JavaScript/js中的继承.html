@@ -42,7 +42,7 @@
 -->
 
     <!-- call 继承 -->
-    <script>
+    <!-- <script>
         function A(x) {
             this.x = x;
         }
@@ -64,6 +64,34 @@
         console.log(b1.x);
         console.log('b1.getY ---- ' + b1.getY);
         console.log('b1.getX ---- ' + b1.getX);
+    </script> -->
+
+    <!-- 寄生组合继承 -->
+    <script>
+        function A(x) {
+            this.x = x;
+        }
+        A.prototype.getX = function () {
+            console.log(this.x);
+        }
+
+        function B(y) {
+            A.call(this, 200);
+            this.y = y;
+        }
+        //  Object.create(OBJ): 创建一个空对象，让空对象的 __proto__ 指向 OBJ
+        B.prototype = Object.create(A.prototype);
+        B.prototype.constructor = B;
+        B.prototype.getY = function () {
+            console.log(this.y);
+        }
+
+        let b1 = new B(100);
+
+        console.log(b1.x);
+        console.log(b1.y);
+        console.log('b1.getX ---- ' + b1.getX);
+        console.log('b1.getY ---- ' + b1.getY);
     </script>
 
 </body>
