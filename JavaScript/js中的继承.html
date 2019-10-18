@@ -67,7 +67,7 @@
     </script> -->
 
     <!-- 寄生组合继承 -->
-    <script>
+    <!-- <script>
         function A(x) {
             this.x = x;
         }
@@ -92,6 +92,34 @@
         console.log(b1.y);
         console.log('b1.getX ---- ' + b1.getX);
         console.log('b1.getY ---- ' + b1.getY);
+    </script> -->
+
+    <!-- ES6 中的继承 -->
+    <script>
+        //  ES6 中基于 class 创造出来的类不能当做普通函数执行
+        class A {
+            constructor(x) {
+                this.x = x;
+            }
+            getX() {
+                console.log(this.x);
+            }
+        }
+
+        //  ES6 中的继承
+        class B extends A {
+            constructor(y) {
+                super(200);
+                this.y = y;
+            }
+            getY() {
+                console.log(this.y);
+            }
+        }
+        
+        // B.prototype = Object.create(A.prototype);    //  没用，不允许重定向原型的指向
+        let b1 = new B(100);
+        console.log(b1)
     </script>
 
 </body>
