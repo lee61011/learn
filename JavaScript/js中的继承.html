@@ -108,6 +108,8 @@
 
         //  ES6 中的继承
         class B extends A {
+            //  子类只要继承父类，可以不写 constructor 一旦写了，则在 constructor 中的第一句必须是 super()
+            //  不写 constructor 浏览器会自己默认创建
             constructor(y) {
                 super(200);
                 this.y = y;
