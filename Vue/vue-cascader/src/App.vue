@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Cascader :potions="options"></Cascader>
+    <Cascader :options="options"></Cascader>
   </div>
 </template>
 
@@ -26,6 +26,33 @@ export default {
                 },
                 {
                   label: '里脊肉',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: '水果类',
+          children: [
+            {
+              label: '苹果',
+              children: [
+                {
+                  label: '红富士',
+                },
+                {
+                  label: '青苹果',
+                },
+              ],
+            },
+            {
+              label: '葡萄',
+              children: [
+                {
+                  label: '红葡萄',
+                },
+                {
+                  label: '青葡萄',
                 },
               ],
             },
