@@ -1,8 +1,10 @@
 <template>
   <div class="cascader" v-click-outside="close"><!--vue 的指令都要以 v- 开头，如果点击的是元素外面的区域，调用 close 方法-->
-    <div class="title" @click="toggle"></div>
+    <div class="title" @click="toggle">
+      {{ result }}
+    </div>
     <div class="content" v-if="isVisible">
-      <CascaderItem :options="options"></CascaderItem>
+      <CascaderItem :options="options" :value="value" :level="0" @change="change"></CascaderItem>
     </div>
   </div>
 </template>
@@ -20,6 +22,10 @@ export default {
     CascaderItem,
   },
   props: {
+    value: {
+      type: Array,
+      default: () => [],
+    },
     options: {
       type: Array,
       default: () => [],
@@ -31,12 +37,20 @@ export default {
   directives: {
     clickOutside: util.clickOutside,
   },
+  computed: {
+    result() {
+      this.value.map(item => item.label).join('/');
+    }
+  },
   data() {
     return {
       isVisible: false,
     };
   },
   methods: {
+    change(value) {
+      this.$emit('input', value)
+    },
     close() {
       this.isVisible = false;
     },
@@ -53,7 +67,17 @@ export default {
   .title
     width 150px;
     height 30px;
+    line-height 30px
     border 1px solid #ccc;
   .content
     display flex
+  .content-left
+    border: 1px solid #cccccc
+    min-height 150px
+  .label
+    width 80px
+    padding-left 5px
+  .label:hover
+    background: #999999
+    cursor pointer
 </style>

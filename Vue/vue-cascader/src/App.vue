@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <Cascader :options="options"></Cascader>
+    <!-- 获取用户选择的数据 -->
+    <Cascader :options="options" v-model="value"></Cascader>
   </div>
 </template>
 
@@ -14,6 +15,7 @@ export default {
   },
   data() {
     return {
+      value: [],
       options: [
         {
           label: '肉类',
