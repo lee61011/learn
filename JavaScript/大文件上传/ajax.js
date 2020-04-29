@@ -24,3 +24,16 @@ function $ajax(options) {
     xhr.send(options.data)
   })
 }
+
+function $formatFileName(filename) {
+  let dotIndex = filename.lastIndexOf('.')
+  let name = filename.substring(0, dotIndex)
+  let suffix = filename.substring(dotIndex + 1)
+
+  name = md5(name) + new Date().getTime()
+  return {
+    hash: name,
+    suffix,
+    filename: `${name}.${suffix}`
+  }
+}

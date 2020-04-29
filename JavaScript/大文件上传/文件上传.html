@@ -16,7 +16,7 @@
   <script>
     let limitType = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'] // 限制上传文件类型
     let limitMax = 100 * 1024 // 限制上传文件大小，100kb
-    fileInp.onchange = function () {
+    fileInp.onchange = async function () {
       let file = fileInp.files[0]
       if (!file) return
       if (!limitType.includes(file.type)) {
@@ -31,6 +31,16 @@
       }
 
       let formData = new FormData() // 通过 formData 向服务器传递数据会默认添加一个请求头: Content-type: mutilpart/form-data 表示多个片段
+      formData.append('chunk', file)
+      formData.append('filename', $formatFileName(file.name).filename)
+      console.log('获取的文件名 ------ ', $formatFileName(file.name))
+      let result = await $ajax({
+        url: 'http://127.0.0.1:5678/single',
+        data: formData
+      })
+      if (result.code == 0) {
+        serverImg.src = result.path
+      }
     }
   </script>
 </body>
