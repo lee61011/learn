@@ -3,11 +3,13 @@ function $ajax(options) {
     url: '',
     method: 'post',
     data: null,
-    headers: {}
+    headers: {},
+    progress: Function.prototype
   }, options)
 
   return new Promise((resolve, reject) => {
     let xhr = new XMLHttpRequest
+    xhr.upload.onprogress = options.progress
     xhr.open(options.method, options.url)
     Object.keys(options.headers).forEach(key => {
       xhr.setRequestHeader(key, options.headers[key])
