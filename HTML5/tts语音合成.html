@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TTS语音</title>
+</head>
+<body>
+  <input type="text" id="inputVal">
+  <button id="btn">播放语音</button>
+
+  <script>
+    btn.onclick = function() {
+      let msgs = inputVal.value
+
+      if (msgs.trim() !== '') {
+        tts(msgs)
+      }
+    }
+
+    function tts(msgs) {
+      const msg = new SpeechSynthesisUtterance(msgs) // 语音合成
+      msg.volume = 1 // 获取并设置说话的音量   0（最低）和1（最高）之间 默认值1
+      msg.rate = 1 // 获取并设置说话的速度   0.1（最低）和10（最高）之间 默认值1
+      msg.pitch = 1.5 // 获取并设置发声的音调  0（最低）和2（最高）之间  默认值1
+
+      window.speechSynthesis.speak(msg)
+    }
+  </script>
+</body>
+</html>
