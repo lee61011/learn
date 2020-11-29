@@ -44,16 +44,16 @@ export default {
   },
   methods: {
     change(item) {
-      this.$emit('change', item);
+      this.$emit('change', item)
     },
     select(item) { // 每次修改的时候 需要向父组件发送事件 通知父组件修改数据
-      this.currentSelected = item; // 把当前左边选中的这一项存储起来
+      this.currentSelected = item // 把当前左边选中的这一项存储起来
       // 把数据拷贝一份 将数据改好后提交给父组件
-      let cloneValue = cloneDeep(this.value); // 把父组件传递的数据拷贝
-      cloneValue[this.level] = item;
-      cloneValue.splice(this.level + 1); // 当前点击某一项 就将自己的后面+1的所有项都删除调
-      this.$emit('change', cloneValue);
-      console.log(item);
+      let cloneValue = cloneDeep(this.value) // 把父组件传递的数据拷贝
+      cloneValue[this.level] = item
+      cloneValue.splice(this.level + 1) // 当前点击某一项 就将自己的后面+1的所有项都删除调
+      this.$emit('change', cloneValue)
+      console.log(item)
     },
   },
 };

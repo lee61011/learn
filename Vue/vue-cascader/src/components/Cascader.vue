@@ -39,7 +39,9 @@ export default {
   },
   computed: {
     result() {
-      return this.value.map(item => item.label).join('/');
+      return this.value.map(item => {
+        item.label
+      }).join('/')
     }
   },
   data() {
