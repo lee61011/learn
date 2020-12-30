@@ -1,6 +1,6 @@
 // 这个模块是用来实现 promise，在 angular.js 里的 promise 就是用的 q
 // let Q = require('q')
-let Q = {
+let Q = {  
   defer() {
     let success, error
     return {
