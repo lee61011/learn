@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas 检测工具</title>
+  <style>
+    html,body {
+      height: 100%;
+      padding: 0;
+      margin: 0;
+    }
+    .input-container {
+      padding: 10px;
+    }
+    .canvas-container {
+      width: calc(100% - 50px);
+      height: calc(100% - 110px);
+      padding: 10px;
+    }
+    canvas {
+      margin-top: 20px;
+      border: 1px solid red;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="input-container">
+    多边形数据：<input id="polygonInput" type="text"> &nbsp;&nbsp; <button id="polygonButton">绘制多边形</button>
+    <br>
+    矩形数据：&nbsp;&nbsp;&nbsp;<input id="rectInput" type="text"> &nbsp;&nbsp; <button id="rectButton">绘制矩形</button>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <select name="" id="select">
+      <option value="1">区域1</option>
+      <option value="2">区域2</option>
+      <option value="3">区域3</option>
+      <option value="4">区域4</option>
+      <option value="5">区域5</option>
+      <option value="6">区域6</option>
+    </select>
+    &nbsp;&nbsp;
+    <button id="clearButton">清除</button>
+  </div>
+
+  <div class="canvas-container">
+    <canvas id="canvas" width=960 height=540 oncontextmenu="event.preventDefault()"></canvas>
+  </div>
+
+  <script>
+    const CANVAS_WIDTH = 960
+    const CANVAS_HEIGHT = 540
+    const LINE_COLOR = '#87CEEB'
+    let ctx = null
+
+    window.onload = () => {
+      const canvasDom = document.getElementById('canvas')
+      ctx = canvasDom.getContext('2d')
+      canvasDom.addEventListener('click', clickEvent, false)
+      canvasDom.addEventListener('mouseup', mouseupEvent, false)
+      canvasDom.addEventListener('mousemove', mouseMoveEvent, false)
+    }
+
+    let drawingStatus = false
+    let polygonPoints = { 1: [], 2: [], 3: [], 4: [], 5: [], 6: [] }
+    const clickEvent = ev => {
+      const { offsetX, offsetY } = ev
+      startDrawPolygon([parseInt(offsetX), parseInt(offsetY)])
+    }
+    const mouseupEvent = ev => {
+      if (ev.button !== 2) return // 右键
+      const { offsetX, offsetY } = ev
+      closeDrawPolygon()
+    }
+    const mouseMoveEvent = ev => {
+      if (!drawingStatus) return
+      const { offsetX: x, offsetY: y } = ev
+      const points = polygonPoints[select.value]
+      const pl = points.length
+      ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
+      const startPoint = pl > 1 ? points[pl - 1] : points[0]
+      drawAllPolygon()
+      drawLine([startPoint, [x, y]], 1)
+    }
+    const drawAllPolygon = () => {
+      for (const key in polygonPoints) {
+        drawPolygon(polygonPoints[key])
+      }
+      drawPolygonInput()
+      drawRectInput()
+    }
+    const drawLine = (points, drawWay) => {
+      const [[x1, y1], [x2, y2]] = points.slice(-2)
+      ctx.strokeStyle = LINE_COLOR
+      ctx.beginPath()
+      ctx.moveTo(x1, y1)
+      ctx.lineTo(x2, y2)
+      ctx.stroke()
+    }
+    const drawPolygon = points => {
+      ctx.beginPath()
+      for (let i = 0; i < points.length; i++) {
+        const [x, y] = points[i]
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y)
+        ctx.fillText(`${parseInt(x * 2)} _ ${parseInt(y * 2)}`, x, y)
+      }
+      ctx.stroke()
+    }
+    const startDrawPolygon = (point) => {
+      //  1. 未开始
+      //    1.1 点击判断是否已达数量上限 提示错误并返回
+      //    1.2 数量未超限 设置起始点
+      //  2. 绘制中
+      //    2.1 记录坐标点连线 更新坐标信息
+      // const points = JSON.parse(JSON.stringify(polygonPoints))
+      const points = polygonPoints[select.value]
+      const pl = points.length
+      if (!drawingStatus) {
+        // 开始绘制
+        if (pl !== 0) return alert('该区域已有图形！')
+        drawingStatus = true
+        points.push(point)
+      } else {
+        // 连接线段
+        ctx.lineWidth = 1
+        ctx.strokeStyle = LINE_COLOR
+        points.push(point)
+        drawLine(points, 1)
+      }
+    }
+    const closeDrawPolygon = () => {
+      const points = polygonPoints[select.value]
+      if (points.length < 3) {
+        alert('无法闭合！')
+      } else {
+        const startPoint = points[0]
+        points.push(startPoint)
+        ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
+        drawAllPolygon()
+      }
+      drawingStatus = false
+    }
+
+    const getCanvasContext = () => {
+      const canvasDom = document.getElementById('canvas')
+      const ctx = canvasDom.getContext('2d')
+      return { ctx }
+    }
+
+    const drawPolygonInput = () => {
+      if (!polygonInput.value) return
+      const points = JSON.parse(polygonInput.value)
+      if (points.length > 2) {
+        points.push(points[0])
+      }
+      ctx.strokeStyle = '#FF0000'
+      ctx.beginPath()
+      for (let i = 0; i < points.length; i++) {
+        const { X, Y } = points[i]
+        i === 0 ? ctx.moveTo(parseInt(X / 2), parseInt(Y / 2)) : ctx.lineTo(parseInt(X / 2), parseInt(Y / 2))
+      }
+      ctx.stroke()
+    }
+    const drawRectInput = () => {
+      if (!rectInput.value) return
+      let {X1, Y1, X2, Y2} = JSON.parse(rectInput.value)
+      X1 = parseInt(X1 / 2)
+      Y1 = parseInt(Y1 / 2)
+      X2 = parseInt(X2 / 2)
+      Y2 = parseInt(Y2 / 2)
+      ctx.strokeStyle = '#00FF00'
+      ctx.strokeRect(X1, Y1, X2 - X1, Y2 - Y1)
+    }
+    rectButton.onclick = drawRectInput
+    polygonButton.onclick = drawPolygonInput
+    clearButton.onclick = () => {
+      ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
+      polygonPoints[select.value] = []
+      drawAllPolygon()
+    }
+  </script>
+</body>
+</html>
